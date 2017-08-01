@@ -4,14 +4,10 @@ import * as actionTypes from "../constants";
 const INITIAL_STATE = Map({
     isLoggedIn: false,
     fetching: false,
-    fetched: false,
     error: null,
     credentials: Map({
-        first_name: '',
-        last_name: '',
-        password: '',
-        confirm_password: '',
-        old_password: ''
+        email: '',
+        password: ''
     }),
     user: '',
     token: ''
@@ -29,7 +25,16 @@ export default function(state=INITIAL_STATE, action) {
                 }))
             );
         }
-        default:
+        case actionTypes.LOGIN_FAILED: {
+            return (
+                state.merge(Map({
+                    isLoggedIn: false,
+                    error: action.error.response.data.message
+                }))
+            );
+        }
+        default: {
             return state;
+        }
     }
 }

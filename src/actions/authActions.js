@@ -15,6 +15,13 @@ export function loginSuccess(payload) {
     }
 }
 
+export function loginFailed(error) {
+    return {
+        type: constants.LOGIN_FAILED,
+        error
+    }
+}
+
 export function loginUser(credentials) {
     return dispatch => {
         dispatch(loginRequest(credentials));
@@ -29,7 +36,7 @@ export function loginUser(credentials) {
                     dispatch(loginSuccess(payload));
                 })
                 .catch(error => {
-                    console.log("Error: ", error);
+                    dispatch(loginFailed(error));
                 })
         );
     };

@@ -16,7 +16,6 @@ const INITIAL_STATE = Map({
 });
 
 export default function(state=INITIAL_STATE, action) {
-    console.log(action);
     switch (action.type) {
         case actionTypes.REGISTER_USER:
         case actionTypes.REGISTRATION_SUCCESS: {
