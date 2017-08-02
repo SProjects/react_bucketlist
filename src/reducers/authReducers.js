@@ -16,12 +16,13 @@ const INITIAL_STATE = Map({
 export default function(state=INITIAL_STATE, action) {
     switch (action.type) {
         case actionTypes.LOGIN_USER:
+            return state;
         case actionTypes.LOGIN_SUCCESS: {
             return (
                 state.merge(Map({
                     isLoggedIn: true,
-                    token: action.token,
-                    credentials: fromJS(action.credentials)
+                    token: action.payload.token,
+                    credentials: fromJS(action.payload.credentials)
                 }))
             );
         }
@@ -29,7 +30,7 @@ export default function(state=INITIAL_STATE, action) {
             return (
                 state.merge(Map({
                     isLoggedIn: false,
-                    error: action.error.response.data.message
+                    error: action.error.message
                 }))
             );
         }

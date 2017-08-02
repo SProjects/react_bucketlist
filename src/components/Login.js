@@ -5,6 +5,7 @@ import { Redirect, Link, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions/authActions';
+import * as utils from '../utilities/tokenUtilities';
 
 class Login extends Component {
     handleSubmit(e) {
@@ -19,7 +20,7 @@ class Login extends Component {
                 password: password
             };
             this.props.action.loginUser(loginCredentials).then(() => {
-                if (this.props.auth.get("isLoggedIn")) {
+                if (utils.isAuthenticated()) {
                     this.props.history.push("/");
                 } else {
                     alert(this.props.auth.get("error"));
@@ -30,7 +31,7 @@ class Login extends Component {
     }
 
     render() {
-        if (this.props.auth.isLoggedIn) {
+        if (this.props.auth.get("isLoggedIn") === true) {
             return (<Redirect to="/" from="/login"/>);
         }
 

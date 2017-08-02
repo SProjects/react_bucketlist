@@ -1,10 +1,10 @@
 import axios from "axios";
 import * as constants from "../constants";
+import * as utils from '../utilities/tokenUtilities';
 
-export function loginRequest(credentials) {
+export function loginRequest() {
     return {
-      type: constants.LOGIN_USER,
-      credentials
+      type: constants.LOGIN_USER
     };
 }
 
@@ -24,7 +24,7 @@ export function loginFailed(error) {
 
 export function loginUser(credentials) {
     return dispatch => {
-        dispatch(loginRequest(credentials));
+        dispatch(loginRequest());
         return (
             axios.post("http://127.0.0.1:5000/api/v1/auth/login", credentials)
                 .then(response => {
@@ -33,6 +33,7 @@ export function loginUser(credentials) {
                         token: response.data.token,
                         credentials: credentials
                     };
+                    utils.setAuthToken(response.data.token);
                     dispatch(loginSuccess(payload));
                 })
                 .catch(error => {
