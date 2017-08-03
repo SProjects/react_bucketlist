@@ -10,6 +10,11 @@ class ItemsInList extends Component {
         this.props.itemAction.editRequest(item);
     }
 
+    handleCompletion(item, status) {
+        let bucketlist = this.props.bucketlist;
+        this.props.itemAction.updateStatus(bucketlist, item, status);
+    }
+
     render() {
         return (
             <div className="column">
@@ -17,9 +22,20 @@ class ItemsInList extends Component {
                 <div className="ui fluid card">
                     <div className="content">
                         <i className="right floated trash black icon" />
-                        <i className="right floated edit black icon"
-                           onClick={this.handleEdit.bind(this, this.props.item)}/>
-                        <i className="right floated check green icon" />
+                        {this.props.item.get("done") === false ?
+                            <i className="right floated edit black icon"
+                               onClick={this.handleEdit.bind(this, this.props.item)}/>
+                            :
+                            null
+                        }
+
+                        {this.props.item.get("done") ?
+                            <i className="right floated check grey icon"
+                               onClick={this.handleCompletion.bind(this, this.props.item, false)}/>
+                            :
+                            <i className="right floated check green icon"
+                               onClick={this.handleCompletion.bind(this, this.props.item, true)}/>
+                        }
 
                         <div className="header">{this.props.item.get("name")}</div>
                         <div className="description">
@@ -36,7 +52,7 @@ class ItemsInList extends Component {
 
 function mapStateToProps(state, prop) {
     return {
-        state: state
+        bucketlist: state.item.get("bucketlist")
     }
 }
 

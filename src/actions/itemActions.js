@@ -73,3 +73,9 @@ export function update(bucketlist, id, payload) {
         )
     }
 }
+
+export function updateStatus(bucketlist, item, status) {
+    return dispatch => {
+        dispatch(update(bucketlist, item.get("id"), {done: status}))
+    }
+}
