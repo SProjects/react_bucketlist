@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux'
+import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import * as headerActions from '../actions/headerActions';
 import * as utils from '../utilities/tokenUtilities';
@@ -26,10 +27,10 @@ class Header extends Component {
             <div>
                 <div className="ui fixed inverted menu">
                     <div className="ui container">
-                        <a className="header item">
+                        <Link to="/" className="header item">
                             <img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Bucketlist" className="logo"/>
                             Bucketlist
-                        </a>
+                        </Link>
 
                         <div className="right menu">
                             <div className="ui simple dropdown item">

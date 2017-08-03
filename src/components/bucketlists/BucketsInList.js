@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import EditBucketlist from './EditBucketlist';
 import DeleteBucketlist from './DeleteBucketlist';
 import * as bucketlistActions from '../../actions/bucketlistActions';
+import * as itemActions from '../../actions/itemActions';
 
 class BucketsInList extends Component {
     handleEdit(bucketlist) {
@@ -12,6 +14,10 @@ class BucketsInList extends Component {
 
     handleDelete(bucketlist) {
         this.props.bucketlistAction.deleteRequest(bucketlist);
+    }
+
+    handleOpen(bucketlist) {
+        this.props.itemAction.loadItems(bucketlist);
     }
 
     render() {
@@ -25,10 +31,11 @@ class BucketsInList extends Component {
                                         <h3 className="ui header">{this.props.bucketlist.get("name")}</h3>
                                     </div>
                                     <div className="right aligned ten wide column">
-                                        <a className="basic link"
-                                           title="Open">
+                                        <Link to={"/bucketlists/" + this.props.bucketlist.get("id") + "/items"}
+                                              className="basic link" title="Open"
+                                              onClick={this.handleOpen.bind(this, this.props.bucketlist)}>
                                             <i className="folder open outline black icon"></i>
-                                        </a>
+                                        </Link>
                                         <a className="basic link" title="Edit"
                                            onClick={this.handleEdit.bind(this, this.props.bucketlist)}>
                                             <i className="edit black icon"></i>
@@ -110,7 +117,9 @@ function mapStateToProps(state, prop) {
 function mapDispatchToProps(dispatch) {
     return {
         bucketlistAction: bindActionCreators(bucketlistActions, dispatch),
+        itemAction: bindActionCreators(itemActions, dispatch)
     }
 }
 
+withRouter(BucketsInList);
 export default connect(mapStateToProps, mapDispatchToProps)(BucketsInList)
