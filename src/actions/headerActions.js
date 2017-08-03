@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as constants from "../constants";
-import * as utils from "../utilities/tokenUtilities";
+import * as headerUtils from "../utilities/headers";
+import * as urls from "../utilities/urls";
 
 export function getCurrentUserRequest() {
     return {
@@ -23,17 +24,11 @@ export function fetchCurrentUserFailed(error) {
 }
 
 export function getCurrentUser() {
-    let token = utils.getAuthToken();
-    let headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Authorization": "Basic " + btoa(token + ":unused")
-    };
-
+    let headers = headerUtils.getAuthHeaders();
     return dispatch => {
         dispatch(getCurrentUserRequest());
         return (
-            axios.get("http://127.0.0.1:5000/api/v1/users/1?token=true", {headers: headers})
+            axios.get(urls.API_URL + "users/1?token=true", {headers: headers})
                 .then(response => {
                     dispatch(loadCurrentUser(response.data));
                 })
@@ -70,17 +65,11 @@ export function updateCurrentUserFailed(error) {
 }
 
 export function updateCurrentUser(user_id, payload) {
-    let token = utils.getAuthToken();
-    let headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Authorization": "Basic " + btoa(token + ":unused")
-    };
-
+    let headers = headerUtils.getAuthHeaders();
     return dispatch => {
         dispatch(updateCurrentUserRequest());
         return (
-            axios.put("http://127.0.0.1:5000/api/v1/users/" + user_id, payload, {headers: headers})
+            axios.put(urls.API_URL + "users/" + user_id, payload, {headers: headers})
                 .then(response => {
                     dispatch(loadCurrentUser(response.data));
                 })

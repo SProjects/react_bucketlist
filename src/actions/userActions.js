@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as constants from "../constants";
+import * as urls from "../utilities/urls";
 
 export function registrationRequest(credentials) {
     return {
@@ -26,7 +27,7 @@ export function registerUser(credentials) {
     return dispatch => {
         dispatch(registrationRequest(credentials));
         return (
-            axios.post("http://127.0.0.1:5000/api/v1/auth/register", credentials)
+            axios.post(urls.API_URL + "auth/register", credentials)
                 .then(response => {
                     let payload = {
                         type: constants.REGISTRATION_SUCCESS,

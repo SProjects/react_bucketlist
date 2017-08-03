@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as constants from "../constants";
-import * as utils from "../utilities/tokenUtilities";
+import * as headerUtils from "../utilities/headers";
+import * as urls from "../utilities/urls";
 
 
 export function bucketlistRequest() {
@@ -24,17 +25,11 @@ export function bucketlistFetchFailed(error) {
 }
 
 export function getBucketlists(limit = 4) {
-    let token = utils.getAuthToken();
-    let headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Authorization": "Basic " + btoa(token + ":unused")
-    };
-
+    let headers = headerUtils.getAuthHeaders();
     return dispatch => {
         dispatch(bucketlistRequest());
         return (
-            axios.get("http://127.0.0.1:5000/api/v1/bucketlists?limit=" + limit, {headers: headers})
+            axios.get(urls.API_URL + "bucketlists?limit=" + limit, {headers: headers})
                 .then(response => {
                     let payload = {
                         type: constants.BUCKETLISTS_FETCHED,
@@ -84,17 +79,11 @@ export function bucketlistCreateFailed(error) {
 }
 
 export function create(payload) {
-    let token = utils.getAuthToken();
-    let headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Authorization": "Basic " + btoa(token + ":unused")
-    };
-
+    let headers = headerUtils.getAuthHeaders();
     return dispatch => {
         dispatch(newBucketlistRequest());
         return (
-            axios.post("http://127.0.0.1:5000/api/v1/bucketlists", payload, {headers: headers})
+            axios.post(urls.API_URL + "bucketlists", payload, {headers: headers})
                 .then(response => {
                     dispatch(newBucketlistCreated(response.data.message));
                     dispatch(closeCreate());
@@ -107,17 +96,11 @@ export function create(payload) {
 }
 
 export function search(searchTerm) {
-    let token = utils.getAuthToken();
-    let headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Authorization": "Basic " + btoa(token + ":unused")
-    };
-
+    let headers = headerUtils.getAuthHeaders();
     return dispatch => {
         dispatch(newBucketlistRequest());
         return (
-            axios.get("http://127.0.0.1:5000/api/v1/bucketlists?q=" + searchTerm, {headers: headers})
+            axios.get(urls.API_URL + "bucketlists?q=" + searchTerm, {headers: headers})
                 .then(response => {
                     let payload = {
                         type: constants.BUCKETLISTS_FETCHED,
