@@ -50,3 +50,58 @@ export function getBucketlists(limit = 4) {
         );
     }
 }
+
+export function createRequest() {
+    return {
+        type: constants.BUCKETLISTS_CREATE_REQUEST
+    }
+}
+
+export function closeCreate() {
+    return {
+        type: constants.BUCKETLISTS_CREATE_CLOSE
+    }
+}
+
+export function newBucketlistRequest() {
+    return {
+        type: constants.BUCKETLISTS_NEW_REQUEST
+    }
+}
+
+export function newBucketlistCreated(message) {
+    return {
+        type: constants.BUCKETLISTS_CREATED,
+        message
+    }
+}
+
+export function bucketlistCreateFailed(error) {
+    return {
+        type: constants.BUCKETLISTS_CREATE_FAILED,
+        error
+    }
+}
+
+export function create(payload) {
+    let token = utils.getAuthToken();
+    let headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Authorization": "Basic " + btoa(token + ":unused")
+    };
+
+    return dispatch => {
+        dispatch(newBucketlistRequest());
+        return (
+            axios.post("http://127.0.0.1:5000/api/v1/bucketlists", payload, {headers: headers})
+                .then(response => {
+                    dispatch(newBucketlistCreated(response.data.message));
+                    dispatch(closeCreate());
+                })
+                .catch(error => {
+                    dispatch(bucketlistCreateFailed(error));
+                })
+        )
+    }
+}

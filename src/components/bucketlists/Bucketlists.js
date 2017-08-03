@@ -7,10 +7,20 @@ import * as bucketlistActions from '../../actions/bucketlistActions';
 import * as utils from '../../utilities/tokenUtilities';
 import NoBucketlists from './NoBucketlists';
 import BucketsInList from './BucketsInList';
+import NewBucketlist from './NewBucketlist';
 
 class Bucketlists extends Component {
     componentWillMount() {
         this.props.bucketlistAction.getBucketlists();
+    }
+
+    componentDidMount() {
+        this.props.bucketlistAction.getBucketlists();
+    }
+
+    handleCreate(event) {
+        this.props.bucketlistAction.createRequest();
+        event.preventDefault();
     }
 
     render() {
@@ -66,7 +76,8 @@ class Bucketlists extends Component {
 
                             <div className="row">
                                 <div className="twelve wide column">
-                                    <a href="" className="ui tiny violet circular button">
+                                    <a className="ui tiny violet circular button"
+                                       onClick={this.handleCreate.bind(this)}>
                                         <i className="plus icon"></i>
                                         Add
                                     </a>
@@ -84,6 +95,7 @@ class Bucketlists extends Component {
                         </div>
                     </div>
                 </div>
+                <NewBucketlist />
             </div>
         );
     }

@@ -7,7 +7,9 @@ const INITIAL_STATE = Map({
     message: '',
     bucketlists: List(),
     previous: null,
-    next: null
+    next: null,
+    showCreate: false,
+    closeCreate: true
 });
 
 export default function(state=INITIAL_STATE, action) {
@@ -28,6 +30,31 @@ export default function(state=INITIAL_STATE, action) {
         case actionTypes.BUCKETLISTS_FETCH_FAILED: {
             return state.merge(Map({
                 fetching: false,
+                error: action.error
+            }))
+        }
+        case actionTypes.BUCKETLISTS_CREATE_REQUEST: {
+            return state.merge(Map({
+                showCreate: true,
+                closeCreate: false
+            }))
+        }
+        case actionTypes.BUCKETLISTS_CREATE_CLOSE: {
+            return state.merge(Map({
+                showCreate: false,
+                closeCreate: true
+            }))
+        }
+        case actionTypes.BUCKETLISTS_NEW_REQUEST: {
+            return state;
+        }
+        case actionTypes.BUCKETLISTS_CREATED: {
+            return state.merge(Map({
+                message: action.message
+            }))
+        }
+        case actionTypes.BUCKETLISTS_CREATE_FAILED: {
+            return state.merge(Map({
                 error: action.error
             }))
         }
