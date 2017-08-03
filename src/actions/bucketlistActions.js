@@ -138,3 +138,48 @@ export function navigate(urlPath) {
         )
     }
 }
+
+export function updateRequest(bucketlist) {
+    return {
+        type: constants.BUCKETLISTS_UPDATE_REQUEST,
+        bucketlist
+    }
+}
+
+export function closeEdit() {
+    return {
+        type: constants.BUCKETLISTS_UPDATE_CLOSE
+    }
+}
+
+export function bucketlistUpdated(message) {
+    return {
+        type: constants.BUCKETLISTS_UPDATED,
+        message
+    }
+}
+
+export function bucketlistUpdateFailed(error) {
+    return {
+        type: constants.BUCKETLISTS_UPDATE_FAILED,
+        error
+    }
+}
+
+export function update(id, payload) {
+    let headers = headerUtils.getAuthHeaders();
+    return dispatch => {
+        return (
+            axios.put(urls.API_URL + "bucketlists/" + id, payload,{headers: headers})
+                .then(() => {
+                    let message = "Bucketlist updated successfully.";
+                    dispatch(bucketlistUpdated(message));
+                    dispatch(closeEdit());
+                    dispatch(getBucketlists);
+                })
+                .catch(error => {
+                    dispatch(bucketlistUpdateFailed(error))
+                })
+        )
+    }
+}
