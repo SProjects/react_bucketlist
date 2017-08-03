@@ -2,11 +2,16 @@ import React, {Component} from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import EditBucketlist from './EditBucketlist';
+import DeleteBucketlist from './DeleteBucketlist';
 import * as bucketlistActions from '../../actions/bucketlistActions';
 
 class BucketsInList extends Component {
     handleEdit(bucketlist) {
-        this.props.bucketlistAction.updateRequest(bucketlist)
+        this.props.bucketlistAction.updateRequest(bucketlist);
+    }
+
+    handleDelete(bucketlist) {
+        this.props.bucketlistAction.deleteRequest(bucketlist);
     }
 
     render() {
@@ -28,7 +33,8 @@ class BucketsInList extends Component {
                                            onClick={this.handleEdit.bind(this, this.props.bucketlist)}>
                                             <i className="edit black icon"></i>
                                         </a>
-                                        <a className="basic link confirm-bucketlist-delete" title="Delete">
+                                        <a className="basic link confirm-bucketlist-delete" title="Delete"
+                                           onClick={this.handleDelete.bind(this, this.props.bucketlist)}>
                                             <i className="trash black icon"></i>
                                         </a>
                                     </div>
@@ -66,6 +72,7 @@ class BucketsInList extends Component {
                             </div>
                         </div>
                         <EditBucketlist/>
+                        <DeleteBucketlist/>
                     </div>
                 </div>
         );

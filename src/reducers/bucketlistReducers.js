@@ -12,7 +12,9 @@ const INITIAL_STATE = Map({
     showCreate: false,
     closeCreate: true,
     showEdit: false,
-    closeEdit: true
+    closeEdit: true,
+    showDelete: false,
+    closeDelete: true
 });
 
 export default function(state=INITIAL_STATE, action) {
@@ -81,6 +83,30 @@ export default function(state=INITIAL_STATE, action) {
             }))
         }
         case actionTypes.BUCKETLISTS_UPDATE_FAILED: {
+            return state.merge(Map({
+                error: action.error
+            }))
+        }
+        case actionTypes.BUCKETLISTS_DELETE_REQUEST: {
+            return state.merge(Map({
+                editBucketlist: fromJS(action.bucketlist),
+                showDelete: true,
+                closeDelete: false
+            }))
+        }
+        case actionTypes.BUCKETLISTS_DELETE_CLOSE: {
+            return state.merge(Map({
+                editBucketlist: null,
+                showDelete: false,
+                closeDelete: true
+            }))
+        }
+        case actionTypes.BUCKETLISTS_DELETED: {
+            return state.merge(Map({
+                message: action.message
+            }))
+        }
+        case actionTypes.BUCKETLISTS_DELETE_FAILED: {
             return state.merge(Map({
                 error: action.error
             }))

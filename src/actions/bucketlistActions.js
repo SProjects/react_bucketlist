@@ -170,7 +170,7 @@ export function update(id, payload) {
     let headers = headerUtils.getAuthHeaders();
     return dispatch => {
         return (
-            axios.put(urls.API_URL + "bucketlists/" + id, payload,{headers: headers})
+            axios.put(urls.API_URL + "bucketlists/" + id, payload, {headers: headers})
                 .then(() => {
                     let message = "Bucketlist updated successfully.";
                     dispatch(bucketlistUpdated(message));
@@ -179,6 +179,50 @@ export function update(id, payload) {
                 })
                 .catch(error => {
                     dispatch(bucketlistUpdateFailed(error))
+                })
+        )
+    }
+}
+
+export function deleteRequest(bucketlist) {
+    return {
+        type: constants.BUCKETLISTS_DELETE_REQUEST,
+        bucketlist
+    }
+}
+
+export function closeDelete() {
+    return {
+        type: constants.BUCKETLISTS_DELETE_CLOSE
+    }
+}
+
+export function bucketlistDeleted(message) {
+    return {
+        type: constants.BUCKETLISTS_DELETED,
+        message
+    }
+}
+
+export function bucketlistDeleteFailed(error) {
+    return {
+        type: constants.BUCKETLISTS_DELETE_FAILED,
+        error
+    }
+}
+
+export function destroy(id) {
+    let headers = headerUtils.getAuthHeaders();
+    return dispatch => {
+        return (
+            axios.delete(urls.API_URL + "bucketlists/" + id, {headers: headers})
+                .then(response => {
+                    dispatch(bucketlistDeleted(response.data));
+                    dispatch(closeDelete());
+                    dispatch(getBucketlists());
+                })
+                .catch(error => {
+                    dispatch(bucketlistDeleteFailed(error));
                 })
         )
     }
