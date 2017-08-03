@@ -116,3 +116,25 @@ export function search(searchTerm) {
         )
     }
 }
+
+export function navigate(urlPath) {
+    let headers = headerUtils.getAuthHeaders();
+    return dispatch => {
+        dispatch(bucketlistRequest());
+        return (
+            axios.get(urls.BASE_URL + urlPath, {headers: headers})
+                .then(response => {
+                    let payload = {
+                        type: constants.BUCKETLISTS_FETCHED,
+                        bucketlists: response.data.results,
+                        next: response.data.next,
+                        previous: response.data.prev
+                    };
+                    dispatch(listBucketlists(payload));
+                })
+                .catch(error => {
+                    dispatch(bucketlistFetchFailed(error));
+                })
+        )
+    }
+}

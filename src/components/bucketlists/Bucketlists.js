@@ -32,6 +32,16 @@ class Bucketlists extends Component {
         }
     }
 
+    handlePreviousNav() {
+        let urlPath = this.props.bucketlist.get("previous");
+        this.props.bucketlistAction.navigate(urlPath);
+    }
+
+    handleNextNav() {
+        let urlPath = this.props.bucketlist.get("next");
+        this.props.bucketlistAction.navigate(urlPath);
+    }
+
     render() {
         if (utils.isAuthenticated() === true) {
             return (<Redirect to="/login" />);
@@ -70,14 +80,31 @@ class Bucketlists extends Component {
                                     </span>
                                 </div>
                                 <div className="right aligned ten wide column">
-                                    <a className="ui tiny violet button">
-                                        <i className="caret left icon"></i>
-                                        Previous
-                                    </a>
-                                    <a className="ui tiny violet button">
-                                        Next
-                                        <i className="caret right icon"></i>
-                                    </a>
+                                    {this.props.bucketlist.get("previous") ?
+                                        <a className="ui tiny violet button"
+                                           onClick={this.handlePreviousNav.bind(this)}>
+                                            <i className="caret left icon"></i>
+                                            Previous
+                                        </a>
+                                        :
+                                        <a className="ui tiny violet button disabled">
+                                            <i className="caret left icon"></i>
+                                            Previous
+                                        </a>
+                                    }
+
+                                    {this.props.bucketlist.get("next") ?
+                                        <a className="ui tiny violet button"
+                                           onClick={this.handleNextNav.bind(this)}>
+                                            Next
+                                            <i className="caret right icon"></i>
+                                        </a>
+                                        :
+                                        <a className="ui tiny violet button disabled">
+                                            Next
+                                            <i className="caret right icon"></i>
+                                        </a>
+                                    }
                                 </div>
                             </div>
 
