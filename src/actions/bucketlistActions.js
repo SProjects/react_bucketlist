@@ -45,7 +45,7 @@ export function getBucketlists(limit = 4) {
                     dispatch(listBucketlists(payload));
                 })
                 .catch(error => {
-                    dispatch(bucketlistFetchFailed(error))
+                    dispatch(bucketlistFetchFailed(error));
                 })
         );
     }
@@ -101,6 +101,34 @@ export function create(payload) {
                 })
                 .catch(error => {
                     dispatch(bucketlistCreateFailed(error));
+                })
+        )
+    }
+}
+
+export function search(searchTerm) {
+    let token = utils.getAuthToken();
+    let headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Authorization": "Basic " + btoa(token + ":unused")
+    };
+
+    return dispatch => {
+        dispatch(newBucketlistRequest());
+        return (
+            axios.get("http://127.0.0.1:5000/api/v1/bucketlists?q=" + searchTerm, {headers: headers})
+                .then(response => {
+                    let payload = {
+                        type: constants.BUCKETLISTS_FETCHED,
+                        bucketlists: response.data.results,
+                        next: response.data.next || '',
+                        previous: response.data.prev || ''
+                    };
+                    dispatch(listBucketlists(payload));
+                })
+                .catch(error => {
+                    dispatch(bucketlistFetchFailed(error));
                 })
         )
     }

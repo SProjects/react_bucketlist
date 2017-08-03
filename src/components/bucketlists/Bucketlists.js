@@ -23,6 +23,15 @@ class Bucketlists extends Component {
         event.preventDefault();
     }
 
+    handleSearch(event) {
+        let searchTerm = event.target.value;
+        if (!searchTerm) {
+            this.props.bucketlistAction.getBucketlists();
+        } else {
+            this.props.bucketlistAction.search(searchTerm);
+        }
+    }
+
     render() {
         if (utils.isAuthenticated() === true) {
             return (<Redirect to="/login" />);
@@ -85,7 +94,7 @@ class Bucketlists extends Component {
                                 <div className="four wide column right aligned">
                                     <div className="ui fluid search left icon input">
                                         <i className="search icon"></i>
-                                        <input placeholder="Search by name"/>
+                                        <input placeholder="Search by name" onKeyUp={this.handleSearch.bind(this)}/>
                                     </div>
                                 </div>
                             </div>
