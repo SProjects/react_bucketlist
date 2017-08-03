@@ -29,7 +29,7 @@ class Items extends Component {
 
         let itemsList = this.props.item.get("items").map(item => {
             return (
-                <ItemsInList key={item.get("id")} item={item} />
+                <ItemsInList key={item.get("id")} item={item} bucketlist={this.props.item.get("bucketlist")} />
             )
         });
 
