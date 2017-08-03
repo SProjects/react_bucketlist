@@ -14,7 +14,7 @@ class Bucketlists extends Component {
     }
 
     render() {
-        if (!!utils.isAuthenticated()) {
+        if (utils.isAuthenticated() === true) {
             return (<Redirect to="/login" />);
         }
 

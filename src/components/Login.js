@@ -20,7 +20,7 @@ class Login extends Component {
                 password: password
             };
             this.props.action.loginUser(loginCredentials).then(() => {
-                if (utils.isAuthenticated()) {
+                if (utils.isAuthenticated() === false) {
                     this.props.history.push("/");
                 } else {
                     alert(this.props.auth.get("error"));

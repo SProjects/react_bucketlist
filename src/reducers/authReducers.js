@@ -30,7 +30,7 @@ export default function(state=INITIAL_STATE, action) {
             return (
                 state.merge(Map({
                     isLoggedIn: false,
-                    error: action.error.message
+                    error: action.error.response.data.message
                 }))
             );
         }
