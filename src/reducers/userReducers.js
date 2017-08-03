@@ -18,6 +18,7 @@ const INITIAL_STATE = Map({
 export default function(state=INITIAL_STATE, action) {
     switch (action.type) {
         case actionTypes.REGISTER_USER:
+            return state;
         case actionTypes.REGISTRATION_SUCCESS: {
             return (
                 state.merge(Map({

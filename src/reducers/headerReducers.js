@@ -8,7 +8,9 @@ const INITIAL_STATE = Map({
         last_name: '',
         email: '',
         bucketlist_url: '',
-    })
+    }),
+    show: false,
+    close: true
 });
 
 export default function(state=INITIAL_STATE, action) {
@@ -21,6 +23,26 @@ export default function(state=INITIAL_STATE, action) {
             }))
         }
         case actionTypes.CURRENT_USER_FETCHED_FAILED: {
+            return state.merge(Map({
+                error: action.error
+            }))
+        }
+        case actionTypes.CURRENT_USER_EDIT_REQUEST: {
+            return state.merge(Map({
+                show: true,
+                close: false
+            }))
+        }
+        case actionTypes.CURRENT_USER_EDIT_CLOSE: {
+            return state.merge(Map({
+                show: false,
+                close: true
+            }))
+        }
+        case actionTypes.CURRENT_USER_UPDATE_REQUEST: {
+            return state;
+        }
+        case actionTypes.CURRENT_USER_UPDATE_FAILED: {
             return state.merge(Map({
                 error: action.error
             }))
