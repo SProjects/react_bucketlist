@@ -7,6 +7,7 @@ import * as bucketlistActions from '../../actions/bucketlistActions';
 import * as itemActions from '../../actions/itemActions';
 import * as utils from '../../utilities/tokenUtilities';
 import Header from '../../components/Header';
+import ItemsInList from './ItemsInList';
 
 class Items extends Component {
     render() {
@@ -28,20 +29,7 @@ class Items extends Component {
 
         let itemsList = this.props.item.get("items").map(item => {
             return (
-                <div className="column" key={item.get("id")}>
-                    <div className="ui fluid card">
-                        <div className="content">
-                            <i className="right floated trash black icon confirm-item-delete"></i>
-                            <i className="right floated edit black icon"></i>
-                            <i className="right floated check green icon confirm-item-complete"></i>
-
-                            <div className="header">{item.get("name")}</div>
-                            <div className="description">
-                                Created 2 days ago
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ItemsInList key={item.get("id")} item={item} />
             )
         });
 
