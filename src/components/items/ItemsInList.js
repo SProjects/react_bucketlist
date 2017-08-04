@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import * as itemActions from '../../actions/itemActions';
 import EditItem from './EditItem';
+import DeleteItem from './DeleteItem';
 
 class ItemsInList extends Component {
     handleEdit(item) {
@@ -15,13 +16,19 @@ class ItemsInList extends Component {
         this.props.itemAction.updateStatus(bucketlist, item, status);
     }
 
+    handleDelete(item) {
+        this.props.itemAction.deleteRequest(item);
+    }
+
     render() {
         return (
             <div className="column">
 
                 <div className="ui fluid card">
                     <div className="content">
-                        <i className="right floated trash black icon" />
+                        <i className="right floated trash black icon"
+                           onClick={this.handleDelete.bind(this, this.props.item)}/>
+
                         {this.props.item.get("done") === false ?
                             <i className="right floated edit black icon"
                                onClick={this.handleEdit.bind(this, this.props.item)}/>
@@ -45,6 +52,7 @@ class ItemsInList extends Component {
                 </div>
 
                 <EditItem/>
+                <DeleteItem/>
             </div>
         );
     }

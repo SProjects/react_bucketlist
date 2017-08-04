@@ -9,7 +9,9 @@ const INITIAL_STATE = Map({
     items: List(),
     selectedItem: null,
     showEdit: false,
-    closeEdit: true
+    closeEdit: true,
+    showDelete: false,
+    closeDelete: true,
 });
 
 export default function(state=INITIAL_STATE, action) {
@@ -45,6 +47,33 @@ export default function(state=INITIAL_STATE, action) {
                 selectedItem: null,
                 showEdit: false,
                 closeEdit: true,
+                error: action.error
+            }))
+        }
+        case actionTypes.ITEMS_DELETE_REQUEST: {
+            return state.merge(Map({
+                selectedItem: action.item,
+                showDelete: true,
+                closeDelete: false
+            }))
+        }
+        case actionTypes.ITEMS_DELETE_CLOSE: {
+            return state.merge(Map({
+                selectedItem: null,
+                showDelete: false,
+                closeDelete: true
+            }))
+        }
+        case actionTypes.ITEMS_DELETED: {
+            return state.merge(Map({
+                selectedItem: null,
+                showDelete: false,
+                closeDelete: true,
+                message: action.message
+            }))
+        }
+        case actionTypes.ITEMS_DELETE_FAILED: {
+            return state.merge(Map({
                 error: action.error
             }))
         }

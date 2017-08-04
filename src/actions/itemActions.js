@@ -79,3 +79,48 @@ export function updateStatus(bucketlist, item, status) {
         dispatch(update(bucketlist, item.get("id"), {done: status}))
     }
 }
+
+export function deleteRequest(item) {
+    return {
+        type: constants.ITEMS_DELETE_REQUEST,
+        item
+    }
+}
+
+export function closeDelete() {
+    return {
+        type: constants.ITEMS_DELETE_CLOSE
+    }
+}
+
+export function itemDelete(message) {
+    return {
+        type: constants.ITEMS_DELETED,
+        message
+    }
+}
+
+export function itemDeleteFailed(error) {
+    return {
+        type: constants.ITEMS_DELETE_FAILED,
+        error
+    }
+}
+
+export function destroy(bucketlist, item) {
+    let headers = headerUtils.getAuthHeaders();
+    let bucketlist_id = bucketlist.get("id");
+    let id = item.get("id");
+    return dispatch => {
+        return (
+            axios.delete(urls.API_URL + "bucketlists/" + bucketlist_id + "/items/" + id, {headers: headers})
+                .then(response => {
+                    dispatch(itemDelete(response.data));
+                    dispatch(loadItems(bucketlist));
+                })
+                .catch(error => {
+                    dispatch(itemDeleteFailed(error));
+                })
+        )
+    }
+}
