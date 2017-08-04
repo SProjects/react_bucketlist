@@ -22,7 +22,8 @@ export default function(state=INITIAL_STATE, action) {
                 state.merge(Map({
                     isLoggedIn: true,
                     token: action.payload.token,
-                    credentials: fromJS(action.payload.credentials)
+                    credentials: fromJS(action.payload.credentials),
+                    error: null
                 }))
             );
         }
@@ -31,6 +32,14 @@ export default function(state=INITIAL_STATE, action) {
                 state.merge(Map({
                     isLoggedIn: false,
                     error: action.error.response.data.message
+                }))
+            );
+        }
+        case actionTypes.LOGIN_MISSING_FIELDS: {
+            return (
+                state.merge(Map({
+                    isLoggedIn: false,
+                    error: action.error
                 }))
             );
         }

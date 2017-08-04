@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react';
 
 import { Redirect, Link, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../actions/authActions';
+import * as authActions from '../actions/authActions';
 import * as utils from '../utilities/tokenUtilities';
+import Toaster from './Toaster';
 
 class Login extends Component {
     handleSubmit(e) {
@@ -13,17 +14,15 @@ class Login extends Component {
         let password = this.refs.password.value;
 
         if(email === "" || password === "") {
-            alert("Email and password fields are required");
+            this.props.authAction.missingFields("Email and password fields are required");
         } else {
             let loginCredentials = {
                 email: email,
                 password: password
             };
-            this.props.action.loginUser(loginCredentials).then(() => {
+            this.props.authAction.loginUser(loginCredentials).then(() => {
                 if (utils.isAuthenticated() === false) {
                     this.props.history.push("/");
-                } else {
-                    alert(this.props.auth.get("error"));
                 }
             });
         }
@@ -37,6 +36,7 @@ class Login extends Component {
 
         return (
             <div className="Login top-padding">
+                <Toaster/>
                 <div className="ui stackable grid pad-top-2 full-height">
                     <div className="sixteen wide center aligned row">
                         <div className="sixteen wide middle aligned column">
@@ -82,7 +82,7 @@ function mapStateToProps(state, prop) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        action: bindActionCreators(actions, dispatch)
+        authAction: bindActionCreators(authActions, dispatch)
     }
 }
 

@@ -30,7 +30,6 @@ export function registerUser(credentials) {
             axios.post(urls.API_URL + "auth/register", credentials)
                 .then(response => {
                     let payload = {
-                        type: constants.REGISTRATION_SUCCESS,
                         message: response.data.message,
                         credentials: credentials
                     };
@@ -41,4 +40,11 @@ export function registerUser(credentials) {
                 })
         );
     };
+}
+
+export function missingFields(error) {
+    return {
+        type: constants.REGISTRATION_MISSING_FIELD,
+        error
+    }
 }

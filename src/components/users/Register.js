@@ -5,13 +5,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import * as authActions from '../../actions/authActions';
 import * as userActions from '../../actions/userActions';
+import Toaster from '../Toaster';
 
 class Register extends Component {
-    handleSubmit(e) {
+    handleSubmit(event) {
         if(this.refs.first_name.value.length < 1 && this.refs.last_name.value.length < 1 &&
             this.refs.email.value.length < 1 && this.refs.password.value.length < 1 &&
             this.refs.password_confirm.value.length < 1) {
-            alert("All fields are required.")
+            this.props.userAction.missingFields("All fields are required.");
         } else {
             let payload = {
                 first_name: this.refs.first_name.value,
@@ -22,14 +23,11 @@ class Register extends Component {
             };
             this.props.userAction.registerUser(payload).then(() => {
                 if(this.props.user.get("registered")){
-                    alert(this.props.user.get("message"));
                     this.props.history.push("/login");
-                } else {
-                    alert(this.props.user.get("error"));
                 }
             });
         }
-        e.preventDefault();
+        event.preventDefault();
     }
 
     render() {
@@ -39,6 +37,7 @@ class Register extends Component {
 
         return (
             <div className="Register top-padding">
+                <Toaster/>
                 <div className="ui stackable grid padded full-height">
                     <div className="sixteen wide center aligned row">
                         <div className="sixteen wide middle aligned column">

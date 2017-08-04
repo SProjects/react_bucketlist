@@ -43,3 +43,10 @@ export function loginUser(credentials) {
         );
     };
 }
+
+export function missingFields(error) {
+    return {
+        type: constants.LOGIN_MISSING_FIELDS,
+        error
+    }
+}

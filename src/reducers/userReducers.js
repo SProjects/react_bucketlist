@@ -23,8 +23,8 @@ export default function(state=INITIAL_STATE, action) {
             return (
                 state.merge(Map({
                     registered: true,
-                    message: action.message,
-                    credentials: fromJS(action.credentials)
+                    message: action.payload.message,
+                    credentials: fromJS(action.payload.credentials)
                 }))
             );
         }
@@ -32,6 +32,14 @@ export default function(state=INITIAL_STATE, action) {
             return (
                 state.merge(Map({
                     error: action.error.response.data.message,
+                    registered: false
+                }))
+            );
+        }
+        case actionTypes.REGISTRATION_MISSING_FIELD: {
+            return (
+                state.merge(Map({
+                    error: action.error,
                     registered: false
                 }))
             );

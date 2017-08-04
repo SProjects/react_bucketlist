@@ -15,6 +15,12 @@ class Toaster extends Component {
         }
     };
 
+    componentDidMount() {
+        if(this.props.userSuccessMessage) {
+            this.addAlert("Success", this.props.userSuccessMessage, "success");
+        }
+    }
+
     componentDidUpdate() {
         if(this.props.authErrorMessage) {
             this.addAlert("Error", this.props.authErrorMessage, "error");
@@ -22,10 +28,6 @@ class Toaster extends Component {
 
         if(this.props.userErrorMessage) {
             this.addAlert("Error", this.props.userErrorMessage, "error");
-        }
-
-        if(this.props.userSuccessMessage) {
-            this.addAlert("Success", this.props.userSuccessMessage, "success");
         }
     }
 

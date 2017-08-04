@@ -31,7 +31,7 @@ function mapStateToProps(state, prop) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        action: bindActionCreators(actions, dispatch)
+        authAction: bindActionCreators(actions, dispatch)
     }
 }
 
