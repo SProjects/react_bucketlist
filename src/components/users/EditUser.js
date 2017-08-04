@@ -9,9 +9,9 @@ class EditUser extends Component {
     handleSubmit(e) {
         const user_id = this.props.user.id;
 
-        if (this.refs.first_name.value.length < 1 && this.refs.last_name.value.length < 1 &&
+        if (this.refs.first_name.value.length < 1 || this.refs.last_name.value.length < 1 ||
             this.refs.email.value.length < 1) {
-            alert("Name and email fields are required.");
+            this.props.headerAction.missingFields("Name and email fields are required.");
         } else {
             let payload = {
                 id: user_id,

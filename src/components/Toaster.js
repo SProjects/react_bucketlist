@@ -27,6 +27,10 @@ class Toaster extends Component {
         if(this.props.itemSuccessMessage) {
             this.handleSuccess(this.props.itemSuccessMessage);
         }
+
+        if(this.props.headerSuccessMessage) {
+            this.handleSuccess(this.props.headerSuccessMessage);
+        }
     }
 
     componentDidUpdate() {
@@ -48,6 +52,14 @@ class Toaster extends Component {
 
         if(this.props.itemSuccessMessage) {
             this.handleSuccess(this.props.itemSuccessMessage);
+        }
+
+        if(this.props.headerErrorMessage) {
+            this.handleError(this.props.headerErrorMessage);
+        }
+
+        if(this.props.headerSuccessMessage) {
+            this.handleSuccess(this.props.headerSuccessMessage);
         }
     }
 
@@ -78,7 +90,9 @@ function mapStateToProps(state, prop) {
         bucketlistErrorMessage: state.bucketlist.get("error"),
         bucketlistSuccessMessage: state.bucketlist.get("message"),
         itemSuccessMessage: state.item.get("message"),
-        itemErrorMessage: state.item.get("error")
+        itemErrorMessage: state.item.get("error"),
+        headerSuccessMessage: state.header.get("message"),
+        headerErrorMessage: state.header.get("error")
     }
 }
 

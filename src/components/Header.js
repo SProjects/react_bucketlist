@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import * as headerActions from '../actions/headerActions';
 import * as utils from '../utilities/tokenUtilities';
 import EditUser from './users/EditUser';
+import Toaster from './Toaster';
 
 class Header extends Component {
     componentWillMount() {
@@ -48,7 +49,9 @@ class Header extends Component {
                         </div>
                     </div>
                 </div>
+
                 <EditUser/>
+                <Toaster/>
             </div>
         );
     }

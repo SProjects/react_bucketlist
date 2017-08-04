@@ -10,7 +10,9 @@ const INITIAL_STATE = Map({
         bucketlist_url: '',
     }),
     show: false,
-    close: true
+    close: true,
+    message: '',
+    error: null
 });
 
 export default function(state=INITIAL_STATE, action) {
@@ -24,7 +26,7 @@ export default function(state=INITIAL_STATE, action) {
         }
         case actionTypes.CURRENT_USER_FETCHED_FAILED: {
             return state.merge(Map({
-                error: action.error
+                error: action.error.response.data.message
             }))
         }
         case actionTypes.CURRENT_USER_EDIT_REQUEST: {
@@ -43,6 +45,11 @@ export default function(state=INITIAL_STATE, action) {
             return state;
         }
         case actionTypes.CURRENT_USER_UPDATE_FAILED: {
+            return state.merge(Map({
+                error: action.error.response.data.message
+            }))
+        }
+        case actionTypes.CURRENT_USER_MISSING_FIELD: {
             return state.merge(Map({
                 error: action.error
             }))

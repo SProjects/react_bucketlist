@@ -79,3 +79,10 @@ export function updateCurrentUser(user_id, payload) {
         )
     };
 }
+
+export function missingFields(error) {
+    return {
+        type: constants.CURRENT_USER_MISSING_FIELD,
+        error
+    }
+}
