@@ -37,7 +37,7 @@ class NewBucketlist extends Component {
                                 <Button negative onClick={this.handleClose.bind(this)}>
                                     Close
                                 </Button>
-                                <Button className="ui green button" type="submit">
+                                <Button className="ui violet button" type="submit">
                                     Save
                                 </Button>
                             </Form>

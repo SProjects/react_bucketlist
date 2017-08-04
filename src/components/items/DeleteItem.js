@@ -28,7 +28,7 @@ class DeleteItem extends Component {
                         <Button negative onClick={this.handleDelete.bind(this, this.props.selectedItem)}>
                             Confirm
                         </Button>
-                        <Button className="ui green button"
+                        <Button className="ui violet button"
                                 onClick={this.handleClose.bind(this)}>
                             Nope
                         </Button>
