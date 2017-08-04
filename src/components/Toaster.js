@@ -17,26 +17,46 @@ class Toaster extends Component {
 
     componentDidMount() {
         if(this.props.userSuccessMessage) {
-            this.addAlert("Success", this.props.userSuccessMessage, "success");
+            this.handleSuccess(this.props.userSuccessMessage);
         }
 
         if(this.props.bucketlistSuccessMessage) {
-            this.addAlert("Success", this.props.bucketlistSuccessMessage, "success");
+            this.handleSuccess(this.props.bucketlistSuccessMessage);
+        }
+
+        if(this.props.itemSuccessMessage) {
+            this.handleSuccess(this.props.itemSuccessMessage);
         }
     }
 
     componentDidUpdate() {
         if(this.props.authErrorMessage) {
-            this.addAlert("Error", this.props.authErrorMessage, "error");
+            this.handleError(this.props.authErrorMessage);
         }
 
         if(this.props.userErrorMessage) {
-            this.addAlert("Error", this.props.userErrorMessage, "error");
+            this.handleError(this.props.userErrorMessage);
         }
 
         if(this.props.bucketlistErrorMessage) {
-            this.addAlert("Error", this.props.bucketlistErrorMessage, "error");
+            this.handleError(this.props.bucketlistErrorMessage);
         }
+
+        if(this.props.itemErrorMessage) {
+            this.handleError(this.props.itemErrorMessage);
+        }
+
+        if(this.props.itemSuccessMessage) {
+            this.handleSuccess(this.props.itemSuccessMessage);
+        }
+    }
+
+    handleSuccess(message) {
+        this.addAlert("Success", message, "success");
+    }
+
+    handleError(message) {
+        this.addAlert("Error", message, "error");
     }
 
     render() {
@@ -56,7 +76,9 @@ function mapStateToProps(state, prop) {
         userSuccessMessage: state.user.get("message"),
         userErrorMessage: state.user.get("error"),
         bucketlistErrorMessage: state.bucketlist.get("error"),
-        bucketlistSuccessMessage: state.bucketlist.get("message")
+        bucketlistSuccessMessage: state.bucketlist.get("message"),
+        itemSuccessMessage: state.item.get("message"),
+        itemErrorMessage: state.item.get("error")
     }
 }
 

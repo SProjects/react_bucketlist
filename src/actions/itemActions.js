@@ -19,6 +19,7 @@ export function loadItems(bucketlist) {
         return (
             axios.get(urls.API_URL + "bucketlists/" + bucketlist_id, {headers: headers})
                 .then(response => {
+                    dispatch(clearMessages());
                     dispatch(showItems(response.data));
                 })
                 .catch(error => {
@@ -113,7 +114,7 @@ export function create(bucketlist, payload) {
         return(
             axios.post(urls.API_URL + "bucketlists/" + bucketlist_id + "/items", payload, {headers: headers})
                 .then(response => {
-                    dispatch(itemCreated(response.data));
+                    dispatch(itemCreated(response.data.message));
                     dispatch(closeCreate());
                     dispatch(loadItems(bucketlist))
                 })
@@ -137,7 +138,7 @@ export function closeDelete() {
     }
 }
 
-export function itemDelete(message) {
+export function itemDeleted(message) {
     return {
         type: constants.ITEMS_DELETED,
         message
@@ -159,12 +160,25 @@ export function destroy(bucketlist, item) {
         return (
             axios.delete(urls.API_URL + "bucketlists/" + bucketlist_id + "/items/" + id, {headers: headers})
                 .then(response => {
-                    dispatch(itemDelete(response.data));
+                    dispatch(itemDeleted(response.data.message));
                     dispatch(loadItems(bucketlist));
                 })
                 .catch(error => {
                     dispatch(itemDeleteFailed(error));
                 })
         )
+    }
+}
+
+export function missionFields(error) {
+    return {
+        type: constants.ITEMS_MISSING_FIELDS,
+        error
+    }
+}
+
+export function clearMessages() {
+    return {
+        type: constants.ITEMS_CLEARS_MESSAGES
     }
 }

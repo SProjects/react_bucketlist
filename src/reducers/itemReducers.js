@@ -49,7 +49,7 @@ export default function(state=INITIAL_STATE, action) {
                 selectedItem: null,
                 showEdit: false,
                 closeEdit: true,
-                error: action.error
+                error: action.error.response.data.message
             }))
         }
         case actionTypes.ITEMS_DELETE_REQUEST: {
@@ -76,7 +76,7 @@ export default function(state=INITIAL_STATE, action) {
         }
         case actionTypes.ITEMS_DELETE_FAILED: {
             return state.merge(Map({
-                error: action.error
+                error: action.error.response.data.message
             }))
         }
         case actionTypes.ITEMS_CREATE_REQUEST: {
@@ -98,7 +98,18 @@ export default function(state=INITIAL_STATE, action) {
         }
         case actionTypes.ITEMS_CREATE_FAILED: {
             return state.merge(Map({
+                error: action.error.response.data.message
+            }))
+        }
+        case actionTypes.ITEMS_MISSING_FIELDS: {
+            return state.merge(Map({
                 error: action.error
+            }))
+        }
+        case actionTypes.ITEMS_CLEARS_MESSAGES: {
+            return state.merge(Map({
+                message: "",
+                error: null
             }))
         }
         default: {

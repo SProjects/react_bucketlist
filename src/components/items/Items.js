@@ -9,6 +9,7 @@ import * as utils from '../../utilities/tokenUtilities';
 import Header from '../../components/Header';
 import ItemsInList from './ItemsInList';
 import NewItem from './NewItem';
+import Toaster from '../Toaster';
 
 class Items extends Component {
     handleNewItem() {
@@ -91,6 +92,7 @@ class Items extends Component {
                     </div>
 
                     <NewItem />
+                    <Toaster />
                 </div>
             </div>
         );

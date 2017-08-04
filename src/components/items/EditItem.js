@@ -7,7 +7,7 @@ import * as itemActions from '../../actions/itemActions';
 class EditItem extends Component {
     handleSubmit(event) {
         if (this.refs.name.value.length < 1) {
-            alert("Item name is required.");
+            this.props.itemAction.missionFields("Item name is required.");
         } else {
             let bucketlist = this.props.bucketlist;
             let id = this.props.selectedItem.get("id");
