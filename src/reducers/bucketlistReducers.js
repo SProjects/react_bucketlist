@@ -111,6 +111,11 @@ export default function(state=INITIAL_STATE, action) {
                 error: action.error
             }))
         }
+        case actionTypes.BUCKETLISTS_MISSING_FIELDS: {
+            return state.merge(Map({
+                error: action.error
+            }))
+        }
         default: {
             return state;
         }

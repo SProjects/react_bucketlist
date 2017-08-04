@@ -87,6 +87,7 @@ export function create(payload) {
                 .then(response => {
                     dispatch(newBucketlistCreated(response.data.message));
                     dispatch(closeCreate());
+                    dispatch(getBucketlists());
                 })
                 .catch(error => {
                     dispatch(bucketlistCreateFailed(error));
@@ -225,5 +226,12 @@ export function destroy(id) {
                     dispatch(bucketlistDeleteFailed(error));
                 })
         )
+    }
+}
+
+export function missingFields(error) {
+    return {
+        type: constants.BUCKETLISTS_MISSING_FIELDS,
+        error
     }
 }

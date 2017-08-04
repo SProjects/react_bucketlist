@@ -8,6 +8,7 @@ import * as utils from '../../utilities/tokenUtilities';
 import NoBucketlists from './NoBucketlists';
 import BucketsInList from './BucketsInList';
 import NewBucketlist from './NewBucketlist';
+import Toaster from '../Toaster';
 
 class Bucketlists extends Component {
     componentWillMount() {
@@ -132,6 +133,7 @@ class Bucketlists extends Component {
                     </div>
                 </div>
                 <NewBucketlist />
+                <Toaster/>
             </div>
         );
     }
