@@ -12,6 +12,8 @@ const INITIAL_STATE = Map({
     closeEdit: true,
     showDelete: false,
     closeDelete: true,
+    showCreate: false,
+    closeCreate: true
 });
 
 export default function(state=INITIAL_STATE, action) {
@@ -73,6 +75,28 @@ export default function(state=INITIAL_STATE, action) {
             }))
         }
         case actionTypes.ITEMS_DELETE_FAILED: {
+            return state.merge(Map({
+                error: action.error
+            }))
+        }
+        case actionTypes.ITEMS_CREATE_REQUEST: {
+            return state.merge(Map({
+                showCreate: true,
+                closeCreate: false
+            }))
+        }
+        case actionTypes.ITEMS_CREATE_CLOSE: {
+            return state.merge(Map({
+                showCreate: false,
+                closeCreate: true
+            }))
+        }
+        case actionTypes.ITEMS_CREATED: {
+            return state.merge(Map({
+                message: action.message
+            }))
+        }
+        case actionTypes.ITEMS_CREATE_FAILED: {
             return state.merge(Map({
                 error: action.error
             }))

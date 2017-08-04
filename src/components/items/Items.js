@@ -8,8 +8,13 @@ import * as itemActions from '../../actions/itemActions';
 import * as utils from '../../utilities/tokenUtilities';
 import Header from '../../components/Header';
 import ItemsInList from './ItemsInList';
+import NewItem from './NewItem';
 
 class Items extends Component {
+    handleNewItem() {
+        this.props.itemAction.newItemRequest()
+    }
+
     render() {
         if (utils.isAuthenticated() === true) {
             return (<Redirect to="/login" />);
@@ -59,7 +64,8 @@ class Items extends Component {
 
                                 <div className="row">
                                     <div className="sixteen wide column">
-                                        <a className="ui tiny violet circular button">
+                                        <a className="ui tiny violet circular button"
+                                           onClick={this.handleNewItem.bind(this)}>
                                             <i className="plus icon"></i>
                                             Add
                                         </a>
@@ -83,6 +89,8 @@ class Items extends Component {
                             </div>
                         </div>
                     </div>
+
+                    <NewItem />
                 </div>
             </div>
         );

@@ -80,6 +80,50 @@ export function updateStatus(bucketlist, item, status) {
     }
 }
 
+export function newItemRequest() {
+    return {
+        type: constants.ITEMS_CREATE_REQUEST
+    }
+}
+
+export function closeCreate() {
+    return {
+        type: constants.ITEMS_CREATE_CLOSE
+    }
+}
+
+export function itemCreated(message) {
+    return {
+        type: constants.ITEMS_CREATED,
+        message
+    }
+}
+
+export function itemCreateFailed(error) {
+    return {
+        type: constants.ITEMS_CREATE_FAILED,
+        error
+    }
+}
+
+export function create(bucketlist, payload) {
+    let headers = headerUtils.getAuthHeaders();
+    let bucketlist_id = bucketlist.get("id");
+    return dispatch => {
+        return(
+            axios.post(urls.API_URL + "bucketlists/" + bucketlist_id + "/items", payload, {headers: headers})
+                .then(response => {
+                    dispatch(itemCreated(response.data));
+                    dispatch(closeCreate());
+                    dispatch(loadItems(bucketlist))
+                })
+                .catch(error => {
+                    dispatch(itemCreateFailed(error));
+                })
+        )
+    }
+}
+
 export function deleteRequest(item) {
     return {
         type: constants.ITEMS_DELETE_REQUEST,
