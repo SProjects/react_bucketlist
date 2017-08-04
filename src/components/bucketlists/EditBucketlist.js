@@ -7,7 +7,7 @@ import * as bucketlistActions from '../../actions/bucketlistActions';
 class EditBucketlist extends Component {
     handleSubmit(event) {
         if (this.refs.name.value.length < 1) {
-            alert("Bucketlist name is required.");
+            this.props.bucketlistAction.missingFields("Bucketlist name is required.");
         } else {
             let id = this.props.bucketlist.get("id");
             let payload = {

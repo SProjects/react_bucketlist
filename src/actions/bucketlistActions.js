@@ -131,6 +131,7 @@ export function navigate(urlPath) {
                         next: response.data.next,
                         previous: response.data.prev
                     };
+                    dispatch(clearMessages());
                     dispatch(listBucketlists(payload));
                 })
                 .catch(error => {
@@ -167,6 +168,12 @@ export function bucketlistUpdateFailed(error) {
     }
 }
 
+export function clearMessages() {
+    return {
+        type: constants.BUCKETLISTS_CLEARS_MESSAGES
+    }
+}
+
 export function update(id, payload) {
     let headers = headerUtils.getAuthHeaders();
     return dispatch => {
@@ -176,7 +183,7 @@ export function update(id, payload) {
                     let message = "Bucketlist updated successfully.";
                     dispatch(bucketlistUpdated(message));
                     dispatch(closeEdit());
-                    dispatch(getBucketlists);
+                    dispatch(getBucketlists());
                 })
                 .catch(error => {
                     dispatch(bucketlistUpdateFailed(error))

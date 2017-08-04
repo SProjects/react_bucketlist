@@ -116,6 +116,12 @@ export default function(state=INITIAL_STATE, action) {
                 error: action.error
             }))
         }
+        case actionTypes.BUCKETLISTS_CLEARS_MESSAGES: {
+            return state.merge(Map({
+                message: '',
+                error: null
+            }))
+        }
         default: {
             return state;
         }
