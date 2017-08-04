@@ -225,7 +225,7 @@ export function destroy(id) {
         return (
             axios.delete(urls.API_URL + "bucketlists/" + id, {headers: headers})
                 .then(response => {
-                    dispatch(bucketlistDeleted(response.data));
+                    dispatch(bucketlistDeleted(response.data.message));
                     dispatch(closeDelete());
                     dispatch(getBucketlists());
                 })

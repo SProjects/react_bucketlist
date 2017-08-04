@@ -60,7 +60,7 @@ export default function(state=INITIAL_STATE, action) {
         }
         case actionTypes.BUCKETLISTS_CREATE_FAILED: {
             return state.merge(Map({
-                error: action.error
+                error: action.error.response.data.message
             }))
         }
         case actionTypes.BUCKETLISTS_UPDATE_REQUEST: {
@@ -84,7 +84,7 @@ export default function(state=INITIAL_STATE, action) {
         }
         case actionTypes.BUCKETLISTS_UPDATE_FAILED: {
             return state.merge(Map({
-                error: action.error
+                error: action.error.response.data.message
             }))
         }
         case actionTypes.BUCKETLISTS_DELETE_REQUEST: {
@@ -108,7 +108,7 @@ export default function(state=INITIAL_STATE, action) {
         }
         case actionTypes.BUCKETLISTS_DELETE_FAILED: {
             return state.merge(Map({
-                error: action.error
+                error: action.error.response.data.message
             }))
         }
         case actionTypes.BUCKETLISTS_MISSING_FIELDS: {
