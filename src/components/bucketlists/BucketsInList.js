@@ -92,7 +92,7 @@ function totalItems(items) {
 
 function completeItems(items) {
     let count = 0;
-    items.map(item => {
+    items.forEach(item => {
         if (item.get("done"))
             count += 1;
     });
@@ -101,7 +101,7 @@ function completeItems(items) {
 
 function incompleteItems(items) {
     let count = 0;
-    items.map(item => {
+    items.forEach(item => {
         if (item.get("done") === false)
             count += 1;
     });

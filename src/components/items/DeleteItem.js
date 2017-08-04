@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Form, Modal } from 'semantic-ui-react'
+import { Button, Modal } from 'semantic-ui-react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import * as itemActions from '../../actions/itemActions';
