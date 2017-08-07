@@ -3,7 +3,7 @@
 ## Screenshots
 
 ### Login page
-![Login page](creenshots/login.png?raw=true "Login Page")
+![Login page](screenshots/login.png?raw=true "Login Page")
 
 ### User registration
 ![User registration page](screenshots/registration.png?raw=true "User registration Page")
