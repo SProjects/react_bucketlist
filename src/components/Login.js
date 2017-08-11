@@ -35,7 +35,9 @@ const Login = (props) => (
 
                                 <div className="pad-top-2 centered link">
                                     <i className="add big yellow circle icon"/>
-                                    <Link to="/register" className="link">Sign up for an account!</Link>
+                                    <Link to="/register" className="link" onClick={props.clearRegMessages}>
+                                        Sign up for an account!
+                                    </Link>
                                 </div>
                             </Form>
                         </div>

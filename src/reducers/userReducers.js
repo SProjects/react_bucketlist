@@ -1,4 +1,4 @@
-import {Map, fromJS} from 'immutable';
+ import {Map, fromJS} from 'immutable';
 import * as actionTypes from "../constants";
 
 const INITIAL_STATE = Map({
@@ -17,8 +17,14 @@ const INITIAL_STATE = Map({
 
 export default function(state=INITIAL_STATE, action) {
     switch (action.type) {
+        case actionTypes.REGISTRATION_CLEAR_MESSAGES:
         case actionTypes.REGISTER_USER:
-            return state;
+            return (
+                state.merge(Map({
+                    message: '',
+                    error: null
+                }))
+            );
         case actionTypes.REGISTRATION_SUCCESS: {
             return (
                 state.merge(Map({

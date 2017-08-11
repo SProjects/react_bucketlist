@@ -48,3 +48,9 @@ export function missingFields(error) {
         error
     }
 }
+
+export function clearMessages() {
+    return {
+        type: constants.REGISTRATION_CLEAR_MESSAGES
+    }
+}

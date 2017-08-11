@@ -9,7 +9,6 @@ const INITIAL_STATE = Map({
         email: '',
         password: ''
     }),
-    user: '',
     token: ''
 });
 

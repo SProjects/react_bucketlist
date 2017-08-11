@@ -3,9 +3,11 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as authActions from '../actions/authActions';
+import * as userActions from '../actions/userActions';
 import * as utils from '../utilities/tokenUtilities';
 import Login from '../components/Login';
 import Home from './Home';
+import Toaster from '../components/Toaster'
 
 class Authorization extends Component {
     onSignIn() {
@@ -33,6 +35,10 @@ class Authorization extends Component {
         this.props.authAction.onCrendentialsChange(email, password);
     }
 
+    clearRegMessages() {
+        this.props.userAction.clearMessages();
+    }
+
     render() {
         return (
             <div>
@@ -43,10 +49,12 @@ class Authorization extends Component {
                         onSignIn={this.onSignIn.bind(this)}
                         onEmailChange={this.onEmailChange.bind(this)}
                         onPasswordChange={this.onPasswordChange.bind(this)}
+                        clearRegMessages={this.clearRegMessages.bind(this)}
                     />
                     :
                     <Home/>
                 }
+                <Toaster/>
             </div>
         )
     }
@@ -61,7 +69,8 @@ function mapStateToProps(state, prop) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        authAction: bindActionCreators(authActions, dispatch)
+        authAction: bindActionCreators(authActions, dispatch),
+        userAction: bindActionCreators(userActions, dispatch)
     }
 }
 

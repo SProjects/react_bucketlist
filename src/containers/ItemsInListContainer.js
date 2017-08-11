@@ -84,7 +84,7 @@ class ItemsInListContainer extends Component {
                 />
                 <DeleteItem
                     handleDeleteClose={this.handleDeleteClose.bind(this)}
-                    handleDeleteSubmit={this.handleDeleteSubmit.bind(this, this.props.item)}
+                    handleDeleteSubmit={this.handleDeleteSubmit.bind(this, this.props.selectedItem)}
                     modal={this.props.modal}
                 />
             </div>

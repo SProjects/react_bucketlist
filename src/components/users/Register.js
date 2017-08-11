@@ -23,7 +23,7 @@ class Register extends Component {
             };
             this.props.userAction.registerUser(payload).then(() => {
                 if(this.props.user.get("registered")){
-                    this.props.history.push("/login");
+                    this.props.history.push("/");
                 }
             });
         }
@@ -74,8 +74,8 @@ class Register extends Component {
                                         <Button className="ui green fluid button" type="submit">Create Account</Button>
 
                                         <div className="pad-top-2 centered link">
-                                            <i className="arrow left big yellow circle icon"></i>
-                                            <Link to="/login">Back</Link>
+                                            <i className="arrow left big yellow circle icon"/>
+                                            <Link to="/">Back</Link>
                                         </div>
                                     </Form>
                                 </div>

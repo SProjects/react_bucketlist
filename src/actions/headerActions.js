@@ -31,6 +31,7 @@ export function getCurrentUser() {
             axios.get(urls.API_URL + "users/1?token=true", {headers: headers})
                 .then(response => {
                     dispatch(loadCurrentUser(response.data));
+                    dispatch(clearMessages())
                 })
                 .catch(error => {
                     dispatch(fetchCurrentUserFailed(error));
@@ -64,6 +65,13 @@ export function updateCurrentUserFailed(error) {
     }
 }
 
+export function userUpdated(message) {
+    return {
+        type: constants.CURRENT_USER_UPDATED,
+        message
+    }
+}
+
 export function updateCurrentUser(user_id, payload) {
     let headers = headerUtils.getAuthHeaders();
     return dispatch => {
@@ -71,6 +79,7 @@ export function updateCurrentUser(user_id, payload) {
         return (
             axios.put(urls.API_URL + "users/" + user_id, payload, {headers: headers})
                 .then(response => {
+                    dispatch(userUpdated("Account successfully updated."));
                     dispatch(loadCurrentUser(response.data));
                 })
                 .catch(error => {
@@ -84,5 +93,11 @@ export function missingFields(error) {
     return {
         type: constants.CURRENT_USER_MISSING_FIELD,
         error
+    }
+}
+
+export function clearMessages() {
+    return {
+        type: constants.CURRENT_USER_CLEAR_MESSAGES
     }
 }

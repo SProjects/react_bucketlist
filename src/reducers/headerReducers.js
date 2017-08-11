@@ -22,6 +22,7 @@ export default function(state=INITIAL_STATE, action) {
         case actionTypes.CURRENT_USER_FETCHED: {
             return state.merge(Map({
                 user: action.payload,
+                message: ''
             }))
         }
         case actionTypes.CURRENT_USER_FETCHED_FAILED: {
@@ -49,9 +50,20 @@ export default function(state=INITIAL_STATE, action) {
                 error: action.error.response.data.message
             }))
         }
+        case actionTypes.CURRENT_USER_UPDATED: {
+            return state.merge(Map({
+                message: action.message
+            }))
+        }
         case actionTypes.CURRENT_USER_MISSING_FIELD: {
             return state.merge(Map({
                 error: action.error
+            }))
+        }
+        case actionTypes.CURRENT_USER_CLEAR_MESSAGES: {
+            return state.merge(Map({
+                error: null,
+                message: ''
             }))
         }
         default: {
