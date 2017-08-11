@@ -8,6 +8,7 @@ const INITIAL_STATE = Map({
     bucketlist: null,
     items: List(),
     selectedItem: null,
+    itemName: '',
     showEdit: false,
     closeEdit: true,
     showDelete: false,
@@ -29,19 +30,22 @@ export default function(state=INITIAL_STATE, action) {
             return state.merge(Map({
                 selectedItem: action.item,
                 showEdit: true,
-                closeEdit: false
+                closeEdit: false,
+                itemName: action.item.get("name")
             }))
         }
         case actionTypes.ITEMS_UPDATED: {
             return state.merge(Map({
-                message: action.message
+                message: action.message,
+                itemName: ''
             }))
         }
         case actionTypes.ITEMS_EDIT_CLOSE: {
             return state.merge(Map({
                 selectedItem: null,
                 showEdit: false,
-                closeEdit: true
+                closeEdit: true,
+                itemName: ''
             }))
         }
         case actionTypes.ITEMS_EDIT_FAILED: {
@@ -88,17 +92,24 @@ export default function(state=INITIAL_STATE, action) {
         case actionTypes.ITEMS_CREATE_CLOSE: {
             return state.merge(Map({
                 showCreate: false,
-                closeCreate: true
+                closeCreate: true,
+                itemName: ''
             }))
         }
         case actionTypes.ITEMS_CREATED: {
             return state.merge(Map({
-                message: action.message
+                message: action.message,
+                itemName: ''
             }))
         }
         case actionTypes.ITEMS_CREATE_FAILED: {
             return state.merge(Map({
                 error: action.error.response.data.message
+            }))
+        }
+        case actionTypes.ITEMS_NEW_NAME: {
+            return state.merge(Map({
+                itemName: action.name
             }))
         }
         case actionTypes.ITEMS_MISSING_FIELDS: {

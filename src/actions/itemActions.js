@@ -12,9 +12,8 @@ export function showItems(bucketlist) {
     }
 }
 
-export function loadItems(bucketlist) {
+export function loadItems(bucketlist_id) {
     let headers = headerUtils.getAuthHeaders();
-    let bucketlist_id = bucketlist.get("id");
     return dispatch => {
         return (
             axios.get(urls.API_URL + "bucketlists/" + bucketlist_id, {headers: headers})
@@ -66,7 +65,7 @@ export function update(bucketlist, id, payload) {
                     let message = "Item successfully updated.";
                     dispatch(itemUpdated(message));
                     dispatch(closeEdit());
-                    dispatch(loadItems(bucketlist));
+                    dispatch(loadItems(bucketlist_id));
                 })
                 .catch(error => {
                     dispatch(updateFailed(error));
@@ -84,6 +83,13 @@ export function updateStatus(bucketlist, item, status) {
 export function newItemRequest() {
     return {
         type: constants.ITEMS_CREATE_REQUEST
+    }
+}
+
+export function newItemName(name) {
+    return {
+        type: constants.ITEMS_NEW_NAME,
+        name
     }
 }
 
@@ -116,7 +122,7 @@ export function create(bucketlist, payload) {
                 .then(response => {
                     dispatch(itemCreated(response.data.message));
                     dispatch(closeCreate());
-                    dispatch(loadItems(bucketlist))
+                    dispatch(loadItems(bucketlist_id))
                 })
                 .catch(error => {
                     dispatch(itemCreateFailed(error));
@@ -161,7 +167,7 @@ export function destroy(bucketlist, item) {
             axios.delete(urls.API_URL + "bucketlists/" + bucketlist_id + "/items/" + id, {headers: headers})
                 .then(response => {
                     dispatch(itemDeleted(response.data.message));
-                    dispatch(loadItems(bucketlist));
+                    dispatch(loadItems(bucketlist_id));
                 })
                 .catch(error => {
                     dispatch(itemDeleteFailed(error));
@@ -170,7 +176,7 @@ export function destroy(bucketlist, item) {
     }
 }
 
-export function missionFields(error) {
+export function missingFields(error) {
     return {
         type: constants.ITEMS_MISSING_FIELDS,
         error

@@ -43,6 +43,13 @@ export default function(state=INITIAL_STATE, action) {
                 }))
             );
         }
+        case actionTypes.AUTH_FIELD_CHANGE: {
+            return (
+                state.merge(Map({
+                    credentials: fromJS(action.credentials)
+                }))
+            )
+        }
         default: {
             return state;
         }

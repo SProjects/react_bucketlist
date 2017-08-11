@@ -1,156 +1,74 @@
-import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux';
-import * as authActions from '../../actions/authActions';
-import * as bucketlistActions from '../../actions/bucketlistActions';
-import * as utils from '../../utilities/tokenUtilities';
+import React from 'react';
 import NoBucketlists from './NoBucketlists';
-import BucketsInList from './BucketsInList';
-import NewBucketlist from './NewBucketlist';
 import Toaster from '../Toaster';
 
-class Bucketlists extends Component {
-    componentWillMount() {
-        this.props.bucketlistAction.getBucketlists();
-    }
+const Bucketlists = (props) => (
+    <div className="Bucketlists">
+        <div className="ui main container">
+            <div className="column">
 
-    componentDidMount() {
-        this.props.bucketlistAction.getBucketlists();
-    }
+                <div className="ui grid">
 
-    handleCreate(event) {
-        this.props.bucketlistAction.createRequest();
-        event.preventDefault();
-    }
-
-    handleSearch(event) {
-        let searchTerm = event.target.value;
-        if (!searchTerm) {
-            this.props.bucketlistAction.getBucketlists();
-        } else {
-            this.props.bucketlistAction.search(searchTerm);
-        }
-    }
-
-    handlePreviousNav() {
-        let urlPath = this.props.bucketlist.get("previous");
-        this.props.bucketlistAction.navigate(urlPath);
-    }
-
-    handleNextNav() {
-        let urlPath = this.props.bucketlist.get("next");
-        this.props.bucketlistAction.navigate(urlPath);
-    }
-
-    render() {
-        if (utils.isAuthenticated() === true) {
-            return (<Redirect to="/login" />);
-        }
-
-        if (this.props.bucketlist.get("fetching")) {
-            return (
-                <div className="ui main container">
-                    <div className="column">
-                        <div className="ui active inverted dimmer">
-                            <div className="ui medium text loader">Loading</div>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        let bucketlists;
-        if (this.props.bucketlist.get("bucketlists")) {
-            bucketlists = this.props.bucketlist.get("bucketlists").map(bucketlist => {
-                return <BucketsInList key={bucketlist.get("id")} bucketlist={bucketlist} />
-            });
-        }
-
-        return (
-            <div className="Bucketlists">
-                <div className="ui main container">
-                    <div className="column">
-
-                        <div className="ui grid">
-
-                            <div className="row">
-                                <div className="six wide column">
+                    <div className="row">
+                        <div className="six wide column">
                                     <span className="ui header">
                                         Your Bucketlists
                                     </span>
-                                </div>
-                                <div className="right aligned ten wide column">
-                                    {this.props.bucketlist.get("previous") ?
-                                        <a className="ui tiny violet button"
-                                           onClick={this.handlePreviousNav.bind(this)}>
-                                            <i className="caret left icon"></i>
-                                            Previous
-                                        </a>
-                                        :
-                                        <a className="ui tiny violet button disabled">
-                                            <i className="caret left icon"></i>
-                                            Previous
-                                        </a>
-                                    }
+                        </div>
+                        <div className="right aligned ten wide column">
+                            {props.previousPresent ?
+                                <a className="ui tiny violet button"
+                                   onClick={props.handlePreviousNav}>
+                                    <i className="caret left icon"/>
+                                    Previous
+                                </a>
+                                :
+                                <a className="ui tiny violet button disabled">
+                                    <i className="caret left icon"/>
+                                    Previous
+                                </a>
+                            }
 
-                                    {this.props.bucketlist.get("next") ?
-                                        <a className="ui tiny violet button"
-                                           onClick={this.handleNextNav.bind(this)}>
-                                            Next
-                                            <i className="caret right icon"></i>
-                                        </a>
-                                        :
-                                        <a className="ui tiny violet button disabled">
-                                            Next
-                                            <i className="caret right icon"></i>
-                                        </a>
-                                    }
-                                </div>
-                            </div>
-
-                            <div className="ui divider"></div>
-
-                            <div className="row">
-                                <div className="twelve wide column">
-                                    <a className="ui tiny violet circular button"
-                                       onClick={this.handleCreate.bind(this)}>
-                                        <i className="plus icon"></i>
-                                        Add
-                                    </a>
-                                </div>
-                                <div className="four wide column right aligned">
-                                    <div className="ui fluid search left icon input">
-                                        <i className="search icon"></i>
-                                        <input placeholder="Search by name" onKeyUp={this.handleSearch.bind(this)}/>
-                                    </div>
-                                </div>
-                            </div>
-                            { this.props.bucketlist.get("bucketlists").size === 0 ? <NoBucketlists />  : null }
-
-                            { bucketlists }
+                            {props.nextPresent ?
+                                <a className="ui tiny violet button"
+                                   onClick={props.handleNextNav}>
+                                    Next
+                                    <i className="caret right icon"/>
+                                </a>
+                                :
+                                <a className="ui tiny violet button disabled">
+                                    Next
+                                    <i className="caret right icon"/>
+                                </a>
+                            }
                         </div>
                     </div>
+
+                    <div className="ui divider"></div>
+
+                    <div className="row">
+                        <div className="twelve wide column">
+                            <a className="ui tiny violet circular button"
+                               onClick={props.handleCreate}>
+                                <i className="plus icon"/>
+                                Add
+                            </a>
+                        </div>
+                        <div className="four wide column right aligned">
+                            <div className="ui fluid search left icon input">
+                                <i className="search icon"/>
+                                <input placeholder="Search by name" onKeyUp={props.handleSearch}/>
+                            </div>
+                        </div>
+                    </div>
+                    { props.bucketlists.size === 0 ? <NoBucketlists />  : null }
+
+                    { props.bucketsInList }
                 </div>
-                <NewBucketlist />
-                <Toaster/>
             </div>
-        );
-    }
-}
+        </div>
+        <Toaster/>
+    </div>
+);
 
-function mapStateToProps(state, prop) {
-    return {
-        auth: state.auth,
-        bucketlist: state.bucketlist
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        authAction: bindActionCreators(authActions, dispatch),
-        bucketlistAction: bindActionCreators(bucketlistActions, dispatch),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Bucketlists)
+export default Bucketlists

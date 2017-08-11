@@ -1,73 +1,33 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Moment from 'react-moment';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux';
-import * as itemActions from '../../actions/itemActions';
-import EditItem from './EditItem';
-import DeleteItem from './DeleteItem';
 
-class ItemsInList extends Component {
-    handleEdit(item) {
-        this.props.itemAction.editRequest(item);
-    }
+const ItemsInList = (props) => (
+    <div className="ui fluid card">
+        <div className="content">
+            <i className="right floated trash black icon"
+               onClick={props.handleDelete}/>
 
-    handleCompletion(item, status) {
-        let bucketlist = this.props.bucketlist;
-        this.props.itemAction.updateStatus(bucketlist, item, status);
-    }
+            {props.item.get("done") === false ?
+                <i className="right floated edit black icon"
+                   onClick={props.handleEdit}/>
+                :
+                null
+            }
 
-    handleDelete(item) {
-        this.props.itemAction.deleteRequest(item);
-    }
+            {props.item.get("done") ?
+                <i className="right floated check grey icon"
+                   onClick={props.handleInComplete}/>
+                :
+                <i className="right floated check green icon"
+                   onClick={props.handleComplete}/>
+            }
 
-    render() {
-        return (
-            <div className="column">
-
-                <div className="ui fluid card">
-                    <div className="content">
-                        <i className="right floated trash black icon"
-                           onClick={this.handleDelete.bind(this, this.props.item)}/>
-
-                        {this.props.item.get("done") === false ?
-                            <i className="right floated edit black icon"
-                               onClick={this.handleEdit.bind(this, this.props.item)}/>
-                            :
-                            null
-                        }
-
-                        {this.props.item.get("done") ?
-                            <i className="right floated check grey icon"
-                               onClick={this.handleCompletion.bind(this, this.props.item, false)}/>
-                            :
-                            <i className="right floated check green icon"
-                               onClick={this.handleCompletion.bind(this, this.props.item, true)}/>
-                        }
-
-                        <div className="header">{this.props.item.get("name")}</div>
-                        <div className="description">
-                            Created <Moment fromNow>{this.props.item.get("date_created")}</Moment>
-                        </div>
-                    </div>
-                </div>
-
-                <EditItem/>
-                <DeleteItem/>
+            <div className="header">{props.item.get("name")}</div>
+            <div className="description">
+                Created <Moment fromNow>{props.item.get("date_created")}</Moment>
             </div>
-        );
-    }
-}
+        </div>
+    </div>
+);
 
-function mapStateToProps(state, prop) {
-    return {
-        bucketlist: state.item.get("bucketlist")
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        itemAction: bindActionCreators(itemActions, dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ItemsInList)
+export default ItemsInList;

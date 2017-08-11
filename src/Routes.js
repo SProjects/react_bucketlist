@@ -1,9 +1,8 @@
 import React from 'react';
 
 import App from './App';
-import Login from './components/Login';
 import Register from './components/users/Register';
-import Items from './components/items/Items';
+import ItemsContainer from './containers/ItemsContainer';
 import history from './history';
 import {
     BrowserRouter as Router,
@@ -16,9 +15,8 @@ const Routes = () => {
         <Router history={history}>
             <Switch>
                 <Route exact path="/" component={App}/>
-                <Route path="/login" component={Login}/>
                 <Route path="/register" component={Register}/>
-                <Route path="/bucketlists/:id/items" component={Items}/>
+                <Route path="/bucketlists/:id/items" component={ItemsContainer}/>
             </Switch>
         </Router>
     );

@@ -1,90 +1,49 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
 
-import { Redirect, Link, withRouter } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as authActions from '../actions/authActions';
-import * as utils from '../utilities/tokenUtilities';
-import Toaster from './Toaster';
+import { Link } from 'react-router-dom';
 
-class Login extends Component {
-    handleSubmit(e) {
-        let email = this.refs.email.value;
-        let password = this.refs.password.value;
+const Login = (props) => (
+    <div className="Login top-padding">
+        <div className="ui stackable grid pad-top-2 full-height">
+            <div className="sixteen wide center aligned row">
+                <div className="sixteen wide middle aligned column">
+                    <div className="ui centered padded grid">
+                        <div className="ui four wide column">
+                            <Form className="ui four wide column form segment">
+                                <Form.Field>
+                                    <div className="field centered">
+                                        <img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Bucketlist"
+                                             className="ui middle aligned tiny image logo-name"/>
+                                        <span className="logo-name">Bucketlist</span>
+                                    </div>
+                                </Form.Field>
+                                <Form.Field>
+                                    <input type="email" placeholder="Email"
+                                           onChange={props.onEmailChange}
+                                           value={props.username}/>
+                                </Form.Field>
+                                <Form.Field>
+                                    <input type="password" placeholder="Password"
+                                           onChange={props.onPasswordChange}
+                                           value={props.password}/>
+                                </Form.Field>
+                                <Button className="ui green fluid button" type="submit"
+                                        onClick={props.onSignIn}>
+                                    Sign in
+                                </Button>
 
-        if(email === "" || password === "") {
-            this.props.authAction.missingFields("Email and password fields are required");
-        } else {
-            let loginCredentials = {
-                email: email,
-                password: password
-            };
-            this.props.authAction.loginUser(loginCredentials).then(() => {
-                if (utils.isAuthenticated() === false) {
-                    this.props.history.push("/");
-                }
-            });
-        }
-        e.preventDefault();
-    }
-
-    render() {
-        if (this.props.auth.get("isLoggedIn") === true) {
-            return (<Redirect to="/" from="/login"/>);
-        }
-
-        return (
-            <div className="Login top-padding">
-                <Toaster/>
-                <div className="ui stackable grid pad-top-2 full-height">
-                    <div className="sixteen wide center aligned row">
-                        <div className="sixteen wide middle aligned column">
-                            <div className="ui centered padded grid">
-                                <div className="ui four wide column">
-                                    <Form className="ui four wide column form segment"
-                                          onSubmit={this.handleSubmit.bind(this)}>
-                                        <Form.Field>
-                                            <div className="field centered">
-                                                <img src={process.env.PUBLIC_URL + "/images/logo.png"} alt="Bucketlist"
-                                                     className="ui middle aligned tiny image logo-name"/>
-                                                <span className="logo-name">Bucketlist</span>
-                                            </div>
-                                        </Form.Field>
-                                        <Form.Field>
-                                            <input type="email" ref="email" placeholder="Email"/>
-                                        </Form.Field>
-                                        <Form.Field>
-                                            <input type="password" ref="password" placeholder="Password"/>
-                                        </Form.Field>
-                                        <Button className="ui green fluid button" type="submit">Sign in</Button>
-
-                                        <div className="pad-top-2 centered link">
-                                            <i className="add big yellow circle icon"></i>
-                                            <Link to="/register" className="link">Sign up for an account!</Link>
-                                        </div>
-                                    </Form>
+                                <div className="pad-top-2 centered link">
+                                    <i className="add big yellow circle icon"/>
+                                    <Link to="/register" className="link">Sign up for an account!</Link>
                                 </div>
-                            </div>
+                            </Form>
                         </div>
                     </div>
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+    </div>
+);
 
-function mapStateToProps(state, prop) {
-    return {
-        auth: state.auth
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        authAction: bindActionCreators(authActions, dispatch)
-    }
-}
-
-withRouter(Login);
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

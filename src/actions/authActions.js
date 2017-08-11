@@ -50,3 +50,10 @@ export function missingFields(error) {
         error
     }
 }
+
+export function onCrendentialsChange(email, password) {
+    return {
+        type: constants.AUTH_FIELD_CHANGE,
+        credentials: {email: email, password: password}
+    }
+}

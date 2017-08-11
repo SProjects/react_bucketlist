@@ -1,64 +1,32 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Button, Form, Modal } from 'semantic-ui-react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux';
-import * as bucketlistActions from '../../actions/bucketlistActions';
 
-class NewBucketlist extends Component {
-    handleSubmit(event) {
-        if (this.refs.name.value.length < 1) {
-            this.props.bucketlistAction.missingFields("Bucketlist name is required");
-        } else {
-            let payload = {
-                name: this.refs.name.value
-            };
-            this.props.bucketlistAction.create(payload)
-        }
-        event.preventDefault();
-    }
+const NewBucketlist = (props) => (
+    <div>
+        <Modal size="small" open={props.modal.get("showCreate")}>
+            <Modal.Header>
+                Create New Bucketlist
+            </Modal.Header>
+            <Modal.Content>
+                <div className="row">
+                    <Form className="ui eight wide column form">
+                        <Form.Field>
+                            <input type="text" placeholder="Name"
+                                   onChange={props.onChangeName}
+                                   value={props.bucketlistName}
+                            />
+                        </Form.Field>
+                        <Button negative onClick={props.handleCreateClose}>
+                            Close
+                        </Button>
+                        <Button className="ui violet button" onClick={props.handleCreateSubmit}>
+                            Save
+                        </Button>
+                    </Form>
+                </div>
+            </Modal.Content>
+        </Modal>
+    </div>
+);
 
-    handleClose() {
-        this.props.bucketlistAction.closeCreate();
-    }
-
-    render() {
-        return (
-            <div>
-                <Modal size="small" open={this.props.modal.get("showCreate")}>
-                    <Modal.Header>
-                        Create New Bucketlist
-                    </Modal.Header>
-                    <Modal.Content>
-                        <div className="row">
-                            <Form className="ui eight wide column form" onSubmit={this.handleSubmit.bind(this)}>
-                                <Form.Field>
-                                    <input type="text" ref="name" placeholder="Name"/>
-                                </Form.Field>
-                                <Button negative onClick={this.handleClose.bind(this)}>
-                                    Close
-                                </Button>
-                                <Button className="ui violet button" type="submit">
-                                    Save
-                                </Button>
-                            </Form>
-                        </div>
-                    </Modal.Content>
-                </Modal>
-            </div>
-        );
-    }
-}
-
-function mapStateToProps(state, prop) {
-    return {
-        modal: state.bucketlist
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        bucketlistAction: bindActionCreators(bucketlistActions, dispatch),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewBucketlist)
+export default NewBucketlist;

@@ -64,6 +64,13 @@ export function newBucketlistRequest() {
     }
 }
 
+export function newBucketlistName(name) {
+    return {
+        type: constants.BUCKETLISTS_NEW_NAME,
+        name
+    }
+}
+
 export function newBucketlistCreated(message) {
     return {
         type: constants.BUCKETLISTS_CREATED,

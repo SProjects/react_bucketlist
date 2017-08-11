@@ -6,7 +6,8 @@ const INITIAL_STATE = Map({
     error: null,
     message: '',
     bucketlists: List(),
-    editBucketlist: null,
+    selectedBucketlist: null,
+    bucketlistName: '',
     previous: null,
     next: null,
     showCreate: false,
@@ -47,7 +48,14 @@ export default function(state=INITIAL_STATE, action) {
         case actionTypes.BUCKETLISTS_CREATE_CLOSE: {
             return state.merge(Map({
                 showCreate: false,
-                closeCreate: true
+                closeCreate: true,
+                selectedBucketlist: null,
+                bucketlistName: ''
+            }))
+        }
+        case actionTypes.BUCKETLISTS_NEW_NAME: {
+            return state.merge(Map({
+                bucketlistName: action.name
             }))
         }
         case actionTypes.BUCKETLISTS_NEW_REQUEST: {
@@ -65,9 +73,10 @@ export default function(state=INITIAL_STATE, action) {
         }
         case actionTypes.BUCKETLISTS_UPDATE_REQUEST: {
             return state.merge(Map({
-                editBucketlist: fromJS(action.bucketlist),
+                selectedBucketlist: fromJS(action.bucketlist),
                 showEdit: true,
-                closeEdit: false
+                closeEdit: false,
+                bucketlistName: action.bucketlist.get("name")
             }))
         }
         case actionTypes.BUCKETLISTS_UPDATED: {
@@ -77,9 +86,10 @@ export default function(state=INITIAL_STATE, action) {
         }
         case actionTypes.BUCKETLISTS_UPDATE_CLOSE: {
             return state.merge(Map({
-                editBucketlist: null,
+                selectedBucketlist: null,
                 showEdit: false,
-                closeEdit: true
+                closeEdit: true,
+                bucketlistName: ''
             }))
         }
         case actionTypes.BUCKETLISTS_UPDATE_FAILED: {
@@ -89,14 +99,14 @@ export default function(state=INITIAL_STATE, action) {
         }
         case actionTypes.BUCKETLISTS_DELETE_REQUEST: {
             return state.merge(Map({
-                editBucketlist: fromJS(action.bucketlist),
+                selectedBucketlist: fromJS(action.bucketlist),
                 showDelete: true,
                 closeDelete: false
             }))
         }
         case actionTypes.BUCKETLISTS_DELETE_CLOSE: {
             return state.merge(Map({
-                editBucketlist: null,
+                selectedBucketlist: null,
                 showDelete: false,
                 closeDelete: true
             }))
