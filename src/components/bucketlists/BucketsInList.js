@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 const BucketsInList = (props) => (
     <div>
@@ -59,5 +60,15 @@ const BucketsInList = (props) => (
         </div>
     </div>
 );
+
+BucketsInList.propTypes = {
+    bucketlist: PropTypes.object.isRequired,
+    totalItems: PropTypes.number.isRequired,
+    incompleteItems: PropTypes.number.isRequired,
+    completeItems: PropTypes.number.isRequired,
+    handleOpen: PropTypes.func.isRequired,
+    handleEdit: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired
+};
 
 export default BucketsInList;

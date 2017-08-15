@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Modal } from 'semantic-ui-react'
+import { Button, Modal } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const DeleteBucketlist = (props) => (
     <div>
@@ -26,5 +27,11 @@ const DeleteBucketlist = (props) => (
         </Modal>
     </div>
 );
+
+DeleteBucketlist.propTypes = {
+    modal: PropTypes.object.isRequired,
+    handleDeleteConfirm: PropTypes.func.isRequired,
+    handleDeleteClose: PropTypes.func.isRequired
+};
 
 export default DeleteBucketlist;

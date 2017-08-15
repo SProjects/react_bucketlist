@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form, Modal } from 'semantic-ui-react'
+import PropTypes from 'prop-types';
 
 const NewBucketlist = (props) => (
     <div>
@@ -28,5 +29,13 @@ const NewBucketlist = (props) => (
         </Modal>
     </div>
 );
+
+NewBucketlist.propTypes = {
+    modal: PropTypes.object.isRequired,
+    bucketlistName: PropTypes.string,
+    onChangeName: PropTypes.func.isRequired,
+    handleCreateSubmit: PropTypes.func.isRequired,
+    handleCreateClose: PropTypes.func.isRequired
+};
 
 export default NewBucketlist;

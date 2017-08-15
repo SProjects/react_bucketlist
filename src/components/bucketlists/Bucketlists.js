@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import NoBucketlists from './NoBucketlists';
 import Toaster from '../Toaster';
 
@@ -61,7 +63,7 @@ const Bucketlists = (props) => (
                             </div>
                         </div>
                     </div>
-                    { props.bucketlists.size === 0 ? <NoBucketlists />  : null }
+                    { !props.bucketlists.toJS().length ? <NoBucketlists /> : null }
 
                     { props.bucketsInList }
                 </div>
@@ -70,5 +72,16 @@ const Bucketlists = (props) => (
         <Toaster/>
     </div>
 );
+
+Bucketlists.propTypes = {
+    previousPresent: PropTypes.string,
+    handlePreviousNav: PropTypes.func,
+    nextPresent: PropTypes.string,
+    handleNextNav: PropTypes.func,
+    handleCreate: PropTypes.func,
+    handleSearch: PropTypes.func,
+    bucketlists: PropTypes.object,
+    bucketsInList: PropTypes.object
+};
 
 export default Bucketlists
