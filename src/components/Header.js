@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
+
 import EditUser from './users/EditUser';
 import Toaster from './Toaster';
 
@@ -34,4 +36,11 @@ const Header = (props) => (
     </div>
 );
 
-export default Header
+Header.propTypes = {
+    firstName:  PropTypes.string,
+    onUserEdit: PropTypes.func.isRequired,
+    onLogout: PropTypes.func.isRequired
+
+};
+
+export default Header;

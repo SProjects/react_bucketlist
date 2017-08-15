@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
-
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Login = (props) => (
     <div className="Login top-padding">
@@ -47,5 +47,14 @@ const Login = (props) => (
         </div>
     </div>
 );
+
+Login.propTypes = {
+    onEmailChange: PropTypes.func.isRequired,
+    onPasswordChange: PropTypes.func.isRequired,
+    onSignIn: PropTypes.func.isRequired,
+    clearRegMessages: PropTypes.func.isRequired,
+    username: PropTypes.string,
+    password: PropTypes.string
+};
 
 export default Login;

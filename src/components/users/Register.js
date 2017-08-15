@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as authActions from '../../actions/authActions';
 import * as userActions from '../../actions/userActions';
 import Toaster from '../Toaster';
+import PropTypes from 'prop-types';
 
 class Register extends Component {
     handleSubmit(event) {
@@ -31,7 +32,7 @@ class Register extends Component {
     }
 
     render() {
-        if (this.props.auth.get("isLoggedIn") === true) {
+        if (this.props.auth.get("isLoggedIn")) {
             return (<Redirect to="/" from="/register"/>);
         }
 
@@ -101,6 +102,13 @@ function mapDispatchToProps(dispatch) {
         userAction: bindActionCreators(userActions, dispatch),
     }
 }
+
+Register.propTypes = {
+    auth: PropTypes.object,
+    user: PropTypes.object,
+    authAction: PropTypes.object,
+    userAction: PropTypes.object
+};
 
 withRouter(Register);
 export default connect(mapStateToProps, mapDispatchToProps)(Register)
