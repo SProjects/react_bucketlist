@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Items = (props) => (
     <div className="Items">
@@ -52,5 +53,12 @@ const Items = (props) => (
         </div>
     </div>
 );
+
+Items.protoTypes = {
+    bucketlistName: PropTypes.string.isRequired,
+    handleNewItem: PropTypes.func.isRequired,
+    itemsPresent: PropTypes.bool.isRequired,
+    itemsInList: PropTypes.object
+};
 
 export default Items

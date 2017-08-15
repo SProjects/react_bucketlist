@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Form, Modal } from 'semantic-ui-react'
+import { Button, Form, Modal } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const NewItem = (props) => (
     <div>
@@ -28,5 +29,13 @@ const NewItem = (props) => (
         </Modal>
     </div>
 );
+
+NewItem.propTypes = {
+    itemName: PropTypes.string,
+    modal: PropTypes.object.isRequired,
+    onChangeName: PropTypes.func.isRequired,
+    handleCreateClose: PropTypes.func.isRequired,
+    handleCreateSubmit: PropTypes.func.isRequired
+};
 
 export default NewItem;

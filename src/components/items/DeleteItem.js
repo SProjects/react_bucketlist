@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Modal } from 'semantic-ui-react'
+import { Button, Modal } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const DeleteItem = (props) => (
     <div>
@@ -22,5 +23,11 @@ const DeleteItem = (props) => (
         </Modal>
     </div>
 );
+
+DeleteItem.propTypes = {
+    modal: PropTypes.object.isRequired,
+    handleDeleteSubmit: PropTypes.func.isRequired,
+    handleDeleteClose: PropTypes.func.isRequired
+};
 
 export default DeleteItem;

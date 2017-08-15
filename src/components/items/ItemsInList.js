@@ -1,5 +1,6 @@
 import React from 'react';
 import Moment from 'react-moment';
+import PropTypes from 'prop-types';
 
 const ItemsInList = (props) => (
     <div className="ui fluid card">
@@ -29,5 +30,13 @@ const ItemsInList = (props) => (
         </div>
     </div>
 );
+
+ItemsInList.propTypes = {
+    item: PropTypes.object.isRequired,
+    handleDelete: PropTypes.func.isRequired,
+    handleEdit: PropTypes.func.isRequired,
+    handleInComplete: PropTypes.func.isRequired,
+    handleComplete: PropTypes.func.isRequired
+};
 
 export default ItemsInList;
