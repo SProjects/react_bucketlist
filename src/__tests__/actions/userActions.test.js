@@ -6,84 +6,84 @@ import thunk from "redux-thunk";
 
 import * as actions from "../../actions/userActions";
 import * as constants from "../../constants";
-import * as utils from '../../utilities/tokenUtilities';
+import * as utils from "../../utilities/tokenUtilities";
 
 describe("User Actions", () => {
-    const middlewares = [ thunk ];
-    const mockStore = configureStore(middlewares);
+	const middlewares = [ thunk ];
+	const mockStore = configureStore(middlewares);
 
-    beforeEach(function () {
-        moxios.install();
+	beforeEach(function () {
+		moxios.install();
 
-        global.localStorage = jest.genMockFunction();
-        global.localStorage.setItem = jest.genMockFunction();
-        global.localStorage.getItem = jest.genMockFunction();
-        utils.setAuthToken = jest.genMockFunction();
-    });
+		global.localStorage = jest.genMockFunction();
+		global.localStorage.setItem = jest.genMockFunction();
+		global.localStorage.getItem = jest.genMockFunction();
+		utils.setAuthToken = jest.genMockFunction();
+	});
 
-    afterEach(function () {
-        moxios.uninstall()
-    });
+	afterEach(function () {
+		moxios.uninstall();
+	});
 
-    it("#registerUser on success", () => {
-        const payload = {first_name: "First", last_name: "Last", email: "fake@email.com",
-            password: "pass", confirm_password: "pass"};
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-            request.respondWith({
-                status: 200,
-                response: {message: "Created"}
-            });
-        });
+	it("#registerUser on success", () => {
+		const payload = {first_name: "First", last_name: "Last", email: "fake@email.com",
+			password: "pass", confirm_password: "pass"};
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent();
+			request.respondWith({
+				status: 200,
+				response: {message: "Created"}
+			});
+		});
 
-        let expectedActions = [
-            constants.REGISTER_USER, constants.REGISTRATION_SUCCESS
-        ];
-        let store = mockStore();
+		let expectedActions = [
+			constants.REGISTER_USER, constants.REGISTRATION_SUCCESS
+		];
+		let store = mockStore();
 
-        return store.dispatch(actions.registerUser(payload)).then(() => {
-            let storeActions = [];
-            store.getActions().forEach((actions) => {
-                storeActions.push(actions.type);
-            });
+		return store.dispatch(actions.registerUser(payload)).then(() => {
+			let storeActions = [];
+			store.getActions().forEach((actions) => {
+				storeActions.push(actions.type);
+			});
 
-            expect(storeActions).to.deep.equal(expectedActions);
-        });
-    });
+			expect(storeActions).to.deep.equal(expectedActions);
+		});
+	});
 
-    it("#registerUser on fail", () => {
-        const payload = {first_name: "First", last_name: "Last", email: "fake@email.com",
-            password: "pass", confirm_password: "pass"};
-        moxios.wait(() => {
-            const request = moxios.requests.mostRecent();
-            request.respondWith({
-                status: 403,
-                response: {error: 'Error'}
-            });
-        });
+	it("#registerUser on fail", () => {
+		const payload = {first_name: "First", last_name: "Last", email: "fake@email.com",
+			password: "pass", confirm_password: "pass"};
+		moxios.wait(() => {
+			const request = moxios.requests.mostRecent();
+			request.respondWith({
+				status: 403,
+				response: {error: "Error"}
+			});
+		});
 
-        let expectedActions = [
-            constants.REGISTER_USER, constants.REGISTRATION_FAILED
-        ];
-        let store = mockStore();
+		let expectedActions = [
+			constants.REGISTER_USER, constants.REGISTRATION_FAILED
+		];
+		let store = mockStore();
 
-        return store.dispatch(actions.registerUser(payload)).then(() => {
-            let storeActions = [];
-            store.getActions().forEach((actions) => {
-                storeActions.push(actions.type);
-            });
+		return store.dispatch(actions.registerUser(payload)).then(() => {
+			let storeActions = [];
+			store.getActions().forEach((actions) => {
+				storeActions.push(actions.type);
+			});
 
-            expect(storeActions).to.deep.equal(expectedActions);
-        });
-    });
+			expect(storeActions).to.deep.equal(expectedActions);
+		});
+	});
 
-    it("#missingFields expected action is dispatched", () => {
-        const message = "Fields are required";
-        const expectedActions = {type: constants.REGISTRATION_MISSING_FIELD, error: message};
-        const store = mockStore();
+	it("#missingFields expected action is dispatched", () => {
+		const message = "Fields are required";
+		const expectedActions = {type: constants.REGISTRATION_MISSING_FIELD, error: message};
+		const store = mockStore();
 
-        let result = store.dispatch(actions.missingFields(message));
+		let result = store.dispatch(actions.missingFields(message));
 
-        expect(result).to.deep.equal(expectedActions);
-    });
+		expect(result).to.deep.equal(expectedActions);
+	});
 });

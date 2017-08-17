@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import configureStore from "redux-mock-store";
 import renderer from "react-test-renderer";
 import thunk from "redux-thunk";
@@ -8,41 +8,41 @@ import { shallow } from "enzyme";
 import HeaderContainer from "../../containers/HeaderContainer";
 
 describe("HeaderContainer", () => {
-    const middlewares = [thunk];
-    const mockStore = configureStore(middlewares);
-    let headerContainer;
-    let store;
+	const middlewares = [thunk];
+	const mockStore = configureStore(middlewares);
+	let headerContainer;
+	let store;
 
 
-    beforeEach(() => {
-        const initialState = {
-            header: fromJS({user: {first_name: "First"}})
-        };
+	beforeEach(() => {
+		const initialState = {
+			header: fromJS({user: {first_name: "First"}})
+		};
 
-        global.localStorage = jest.genMockFunction();
-        global.localStorage.setItem = jest.genMockFunction();
-        global.localStorage.getItem = jest.genMockFunction();
+		global.localStorage = jest.genMockFunction();
+		global.localStorage.setItem = jest.genMockFunction();
+		global.localStorage.getItem = jest.genMockFunction();
 
-        store = mockStore(initialState);
+		store = mockStore(initialState);
 
-        headerContainer = shallow(
-            <Provider store={store}>
-                <HeaderContainer/>
-            </Provider>
-        );
-    });
+		headerContainer = shallow(
+			<Provider store={store}>
+				<HeaderContainer/>
+			</Provider>
+		);
+	});
 
-    it("should render HeaderContainer", () => {
-        expect(headerContainer).toBeTruthy();
-    });
+	it("should render HeaderContainer", () => {
+		expect(headerContainer).toBeTruthy();
+	});
 
-    it("should contain the Header component", () => {
-        expect(headerContainer.find("Header")).toBeTruthy();
-    });
+	it("should contain the Header component", () => {
+		expect(headerContainer.find("Header")).toBeTruthy();
+	});
 
-    xit("should capture snapshot of HeaderContainer", () => {
-        const renderedContainer = renderer.create(<HeaderContainer store={store}/>);
+	xit("should capture snapshot of HeaderContainer", () => {
+		const renderedContainer = renderer.create(<HeaderContainer store={store}/>);
 
-        expect(renderedContainer).toMatchSnapshot();
-    });
+		expect(renderedContainer).toMatchSnapshot();
+	});
 });

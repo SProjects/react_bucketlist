@@ -1,57 +1,57 @@
- import {Map, fromJS} from 'immutable';
+import {Map, fromJS} from "immutable";
 import * as actionTypes from "../constants";
 
 const INITIAL_STATE = Map({
-    fetching: false,
-    registered: false,
-    error: null,
-    message: '',
-    credentials: Map({
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        password_confirm: ''
-    })
+	fetching: false,
+	registered: false,
+	error: null,
+	message: "",
+	credentials: Map({
+		first_name: "",
+		last_name: "",
+		email: "",
+		password: "",
+		password_confirm: ""
+	})
 });
 
 export default function(state=INITIAL_STATE, action) {
-    switch (action.type) {
-        case actionTypes.REGISTRATION_CLEAR_MESSAGES:
-        case actionTypes.REGISTER_USER:
-            return (
-                state.merge(Map({
-                    message: '',
-                    error: null
-                }))
-            );
-        case actionTypes.REGISTRATION_SUCCESS: {
-            return (
-                state.merge(Map({
-                    registered: true,
-                    message: action.payload.message,
-                    credentials: fromJS(action.payload.credentials)
-                }))
-            );
-        }
-        case actionTypes.REGISTRATION_FAILED: {
-            return (
-                state.merge(Map({
-                    error: action.error.response.data.message,
-                    registered: false
-                }))
-            );
-        }
-        case actionTypes.REGISTRATION_MISSING_FIELD: {
-            return (
-                state.merge(Map({
-                    error: action.error,
-                    registered: false
-                }))
-            );
-        }
-        default: {
-            return state;
-        }
-    }
+	switch (action.type) {
+	case actionTypes.REGISTRATION_CLEAR_MESSAGES:
+	case actionTypes.REGISTER_USER:
+		return (
+			state.merge(Map({
+				message: "",
+				error: null
+			}))
+		);
+	case actionTypes.REGISTRATION_SUCCESS: {
+		return (
+			state.merge(Map({
+				registered: true,
+				message: action.payload.message,
+				credentials: fromJS(action.payload.credentials)
+			}))
+		);
+	}
+	case actionTypes.REGISTRATION_FAILED: {
+		return (
+			state.merge(Map({
+				error: action.error.response.data.message,
+				registered: false
+			}))
+		);
+	}
+	case actionTypes.REGISTRATION_MISSING_FIELD: {
+		return (
+			state.merge(Map({
+				error: action.error,
+				registered: false
+			}))
+		);
+	}
+	default: {
+		return state;
+	}
+	}
 }

@@ -1,59 +1,59 @@
 import axios from "axios";
 import * as constants from "../constants";
-import * as utils from '../utilities/tokenUtilities';
+import * as utils from "../utilities/tokenUtilities";
 import * as urls from "../utilities/urls";
 
 export function loginRequest() {
-    return {
-      type: constants.LOGIN_USER
-    };
+	return {
+		type: constants.LOGIN_USER
+	};
 }
 
 export function loginSuccess(payload) {
-    return {
-        type: constants.LOGIN_SUCCESS,
-        payload
-    }
+	return {
+		type: constants.LOGIN_SUCCESS,
+		payload
+	};
 }
 
 export function loginFailed(error) {
-    return {
-        type: constants.LOGIN_FAILED,
-        error
-    }
+	return {
+		type: constants.LOGIN_FAILED,
+		error
+	};
 }
 
 export function loginUser(credentials) {
-    return dispatch => {
-        dispatch(loginRequest());
-        return (
-            axios.post(urls.API_URL + "auth/login", credentials)
-                .then(response => {
-                    let payload = {
-                        type: constants.LOGIN_SUCCESS,
-                        token: response.data.token,
-                        credentials: credentials
-                    };
-                    utils.setAuthToken(response.data.token);
-                    dispatch(loginSuccess(payload));
-                })
-                .catch(error => {
-                    dispatch(loginFailed(error));
-                })
-        );
-    };
+	return dispatch => {
+		dispatch(loginRequest());
+		return (
+			axios.post(urls.API_URL + "auth/login", credentials)
+				.then(response => {
+					let payload = {
+						type: constants.LOGIN_SUCCESS,
+						token: response.data.token,
+						credentials: credentials
+					};
+					utils.setAuthToken(response.data.token);
+					dispatch(loginSuccess(payload));
+				})
+				.catch(error => {
+					dispatch(loginFailed(error));
+				})
+		);
+	};
 }
 
 export function missingFields(error) {
-    return {
-        type: constants.LOGIN_MISSING_FIELDS,
-        error
-    }
+	return {
+		type: constants.LOGIN_MISSING_FIELDS,
+		error
+	};
 }
 
 export function onCrendentialsChange(email, password) {
-    return {
-        type: constants.AUTH_FIELD_CHANGE,
-        credentials: {email: email, password: password}
-    }
+	return {
+		type: constants.AUTH_FIELD_CHANGE,
+		credentials: {email: email, password: password}
+	};
 }

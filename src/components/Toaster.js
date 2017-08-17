@@ -82,7 +82,7 @@ class Toaster extends Component {
     }
 }
 
-function mapStateToProps(state, prop) {
+function mapStateToProps(state) {
     return {
         authErrorMessage: state.auth.get("error"),
         userSuccessMessage: state.user.get("message"),
@@ -96,8 +96,4 @@ function mapStateToProps(state, prop) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Toaster)
+export default connect(mapStateToProps)(Toaster)

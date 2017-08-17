@@ -5,9 +5,9 @@ import thunk from "redux-thunk";
 import reducer from "./reducers";
 
 export default(initialState) => {
-    return createStore(
-        reducer,
-        initialState,
-        composeWithDevTools(applyMiddleware(thunk))
-    );
-}
+	return createStore(
+		reducer,
+		initialState,
+		composeWithDevTools(applyMiddleware(thunk))
+	);
+};

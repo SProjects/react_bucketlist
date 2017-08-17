@@ -1,15 +1,15 @@
 export function getAuthToken() {
-    return localStorage.getItem('token');
+	return localStorage.getItem("token");
 }
 
 export function setAuthToken(token) {
-    localStorage.setItem('token', token);
+	localStorage.setItem("token", token);
 }
 
 export function removeAuthToken() {
-    localStorage.removeItem('token');
+	localStorage.removeItem("token");
 }
 
 export function isAuthenticated() {
-    return localStorage.getItem('token') === null;
+	return localStorage.getItem("token") === null;
 }

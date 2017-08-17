@@ -25,11 +25,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:coverage": "react-scripts test --env=jsdom --coverage",
+    "eslint": "eslint --init",
+    "lint:js": "eslint src/ webpack.*.js --cache",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
     "chai": "^4.1.1",
     "enzyme": "^2.9.1",
+    "eslint": "^4.4.1",
+    "eslint-plugin-react": "^7.2.1",
     "moxios": "^0.4.0",
     "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "^15.6.1",
