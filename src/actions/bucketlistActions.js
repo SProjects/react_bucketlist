@@ -38,6 +38,7 @@ export function getBucketlists(limit = 4) {
                         previous: response.data.prev
                     };
                     dispatch(listBucketlists(payload));
+                    dispatch(clearMessages());
                 })
                 .catch(error => {
                     dispatch(bucketlistFetchFailed(error));

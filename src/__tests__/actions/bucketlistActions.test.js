@@ -37,7 +37,10 @@ describe("Bucketlist Actions", () => {
             });
         });
 
-        let expectedActions = [constants.BUCKETLISTS_REQUEST, constants.BUCKETLISTS_FETCHED];
+        let expectedActions = [
+            constants.BUCKETLISTS_REQUEST, constants.BUCKETLISTS_FETCHED,
+            constants.BUCKETLISTS_CLEARS_MESSAGES
+        ];
         let store = mockStore();
 
         return store.dispatch(actions.getBucketlists()).then(() => {
