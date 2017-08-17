@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -45,6 +46,11 @@ function mapDispatchToProps(dispatch) {
         headerAction: bindActionCreators(headerActions, dispatch),
     }
 }
+
+HeaderContainer.propTypes = {
+    firstName: PropTypes.string,
+    headerAction: PropTypes.object
+};
 
 withRouter(HeaderContainer);
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

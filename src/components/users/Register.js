@@ -8,7 +8,7 @@ import * as userActions from '../../actions/userActions';
 import Toaster from '../Toaster';
 import PropTypes from 'prop-types';
 
-class Register extends Component {
+export class Register extends Component {
     handleSubmit(event) {
         if(this.refs.first_name.value.length < 1 && this.refs.last_name.value.length < 1 &&
             this.refs.email.value.length < 1 && this.refs.password.value.length < 1 &&
