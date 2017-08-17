@@ -1,7 +1,6 @@
 import React from "react";
 import { assert, expect } from "chai";
 import moxios from "moxios";
-import sinon from "sinon";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
@@ -13,7 +12,6 @@ import * as utils from '../../utilities/tokenUtilities';
 describe("Auth Actions", () => {
     const middlewares = [ thunk ];
     const mockStore = configureStore(middlewares);
-    let url = urls.API_URL;
 
     beforeEach(function () {
         moxios.install();

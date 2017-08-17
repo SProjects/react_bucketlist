@@ -1,5 +1,5 @@
 import React from "react"
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import { fromJS } from "immutable";
 import BucketsInList from "../../../components/bucketlists/BucketsInList";
 

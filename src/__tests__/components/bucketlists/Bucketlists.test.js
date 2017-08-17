@@ -1,6 +1,6 @@
 import React from "react"
-import { shallow, mount } from "enzyme";
-import { fromJS, List } from "immutable";
+import { shallow, } from "enzyme";
+import { fromJS } from "immutable";
 import Bucketlists from "../../../components/bucketlists/Bucketlists";
 import BucketsInListContainer from "../../../containers/BucketsInListContainer";
 

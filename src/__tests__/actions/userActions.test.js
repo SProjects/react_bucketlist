@@ -1,11 +1,9 @@
 import React from "react";
 import { assert, expect } from "chai";
 import moxios from "moxios";
-import sinon from "sinon";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
-import * as urls from "../../utilities/urls";
 import * as actions from "../../actions/userActions";
 import * as constants from "../../constants";
 import * as utils from '../../utilities/tokenUtilities';
