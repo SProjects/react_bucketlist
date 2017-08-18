@@ -25,19 +25,24 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "test:coverage": "react-scripts test --env=jsdom --coverage",
+    "test:e2e": "mocha --require co-mocha './e2e/tests/*.js'",
     "eslint": "eslint --init",
     "lint:js": "eslint src/ webpack.*.js --cache",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
     "chai": "^4.1.1",
+    "co-mocha": "^1.2.0",
     "enzyme": "^2.9.1",
     "eslint": "^4.4.1",
     "eslint-plugin-react": "^7.2.1",
+    "mocha": "^3.5.0",
+    "mocha-generators": "^2.0.0",
     "moxios": "^0.4.0",
     "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "^15.6.1",
     "redux-mock-store": "^1.2.3",
+    "selenium-webdriver": "^3.5.0",
     "sinon": "^3.2.0"
   }
 }

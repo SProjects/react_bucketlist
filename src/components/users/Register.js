@@ -53,24 +53,25 @@ export class Register extends Component {
 										</div>
 										<div className="two fields">
 											<Form.Field>
-												<input type="text" className="centered" ref="first_name"
+												<input type="text" className="centered" id="first_name" ref="first_name"
 													placeholder="First Name"/>
 											</Form.Field>
 											<Form.Field>
-												<input type="text" className="centered" ref="last_name"
+												<input type="text" className="centered" id="last_name" ref="last_name"
 													placeholder="Last Name"/>
 											</Form.Field>
 										</div>
 										<Form.Field>
-											<input type="email" className="centered" ref="email" placeholder="Email"/>
+											<input type="email" className="centered" id="email" ref="email"
+												   placeholder="Email"/>
 										</Form.Field>
 										<Form.Field>
-											<input type="password" className="centered" ref="password"
+											<input type="password" className="centered" id="password" ref="password"
 												placeholder="Password"/>
 										</Form.Field>
 										<Form.Field>
-											<input type="password" className="centered" ref="password_confirm"
-												placeholder="Confirm Password"/>
+											<input type="password" className="centered" id="password_confirm"
+												   ref="password_confirm" placeholder="Confirm Password"/>
 										</Form.Field>
 										<Button className="ui green fluid button" type="submit">Create Account</Button>
 

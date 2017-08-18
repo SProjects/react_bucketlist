@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const NewBucketlist = (props) => (
 	<div>
-		<Modal size="small" open={props.modal.get("showCreate")}>
+		<Modal id="create-bucketlist" size="small" open={props.modal.get("showCreate")}>
 			<Modal.Header>
                 Create New Bucketlist
 			</Modal.Header>
@@ -12,7 +12,7 @@ const NewBucketlist = (props) => (
 				<div className="row">
 					<Form className="ui eight wide column form">
 						<Form.Field>
-							<input type="text" placeholder="Name"
+							<input type="text" id="name" placeholder="Name"
 								onChange={props.onChangeName}
 								value={props.bucketlistName}
 							/>
