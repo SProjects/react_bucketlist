@@ -15,7 +15,7 @@ class HeaderContainer extends Component {
 
 	onLogout(event) {
 		utils.removeAuthToken();
-		window.location.reload();
+		this.context.router.history.push("/");
 		event.preventDefault();
 	}
 
@@ -50,6 +50,10 @@ function mapDispatchToProps(dispatch) {
 HeaderContainer.propTypes = {
 	firstName: PropTypes.string,
 	headerAction: PropTypes.object
+};
+
+HeaderContainer.contextTypes = {
+	router: PropTypes.object
 };
 
 withRouter(HeaderContainer);

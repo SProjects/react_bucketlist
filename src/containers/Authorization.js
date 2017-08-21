@@ -43,6 +43,8 @@ class Authorization extends Component {
 		return (
 			<div>
 				{ (utils.isAuthenticated()) ?
+					<Home/>
+					:
 					<Login
 						username={this.props.credentials.get("email")}
 						password={this.props.credentials.get("password")}
@@ -51,8 +53,6 @@ class Authorization extends Component {
 						onPasswordChange={this.onPasswordChange.bind(this)}
 						clearRegMessages={this.clearRegMessages.bind(this)}
 					/>
-					:
-					<Home/>
 				}
 				<Toaster/>
 			</div>
