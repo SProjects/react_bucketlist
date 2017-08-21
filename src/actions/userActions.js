@@ -9,14 +9,14 @@ export function registrationRequest(credentials) {
 	};
 }
 
-export function registrationSuccess(payload) {
+function registrationSuccess(payload) {
 	return {
 		type: constants.REGISTRATION_SUCCESS,
 		payload
 	};
 }
 
-export function registrationFailed(error) {
+function registrationFailed(error) {
 	return {
 		type: constants.REGISTRATION_FAILED,
 		error
