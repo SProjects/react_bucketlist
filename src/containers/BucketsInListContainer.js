@@ -28,7 +28,7 @@ class BucketsInListContainer extends Component {
 
 	handleEditSubmit() {
 		let name = this.props.bucketlistName;
-		if (name < 1) {
+		if (!name) {
 			this.props.bucketlistAction.missingFields("Bucketlist name is required.");
 		} else {
 			let id = this.props.selectedBucketlist.get("id");

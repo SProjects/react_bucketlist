@@ -53,7 +53,7 @@ class ItemsInListContainer extends Component {
 
 	handleEditSubmit() {
 		var name = this.props.itemName;
-		if (name.length < 1) {
+		if (!name) {
 			this.props.itemAction.missingFields("Item name is required.");
 		} else {
 			let bucketlist = this.props.bucketlist;

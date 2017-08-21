@@ -6,14 +6,13 @@ import * as userActions from "../../actions/userActions";
 import * as headerActions from "../../actions/headerActions";
 
 class EditUser extends Component {
-	handleSubmit(e) {
+	handleSubmit(event) {
 		const user_id = this.props.user.id;
 
 		if (!this.refs.first_name.value || !this.refs.last_name.value || !this.refs.email.value) {
 			this.props.headerAction.missingFields("Name and email fields are required.");
 		} else {
 			let payload = {
-				id: user_id,
 				first_name: this.refs.first_name.value,
 				last_name: this.refs.last_name.value,
 				email: this.refs.email.value,
@@ -23,7 +22,7 @@ class EditUser extends Component {
 			};
 			this.props.headerAction.updateCurrentUser(user_id, payload);
 		}
-		e.preventDefault();
+		event.preventDefault();
 	}
 
 	handleClose() {

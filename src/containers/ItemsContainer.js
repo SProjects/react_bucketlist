@@ -35,7 +35,7 @@ class ItemsContainer extends Component {
 
 	handleCreateSubmit() {
 		let name = this.props.itemName;
-		if (name < 1) {
+		if (!name) {
 			this.props.itemAction.missingFields("Item name is required.");
 		} else {
 			let bucketlist = this.props.item.get("bucketlist");
