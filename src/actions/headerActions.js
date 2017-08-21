@@ -16,7 +16,7 @@ export function loadCurrentUser(payload) {
 	};
 }
 
-export function fetchCurrentUserFailed(error) {
+function fetchCurrentUserFailed(error) {
 	return {
 		type: constants.CURRENT_USER_FETCHED_FAILED,
 		error
@@ -52,20 +52,20 @@ export function closeEditCurrentUser() {
 	};
 }
 
-export function updateCurrentUserRequest() {
+function updateCurrentUserRequest() {
 	return {
 		type: constants.CURRENT_USER_UPDATE_REQUEST
 	};
 }
 
-export function updateCurrentUserFailed(error) {
+function updateCurrentUserFailed(error) {
 	return {
 		type: constants.CURRENT_USER_UPDATE_FAILED,
 		error
 	};
 }
 
-export function userUpdated(message) {
+function userUpdated(message) {
 	return {
 		type: constants.CURRENT_USER_UPDATED,
 		message
@@ -96,7 +96,7 @@ export function missingFields(error) {
 	};
 }
 
-export function clearMessages() {
+function clearMessages() {
 	return {
 		type: constants.CURRENT_USER_CLEAR_MESSAGES
 	};

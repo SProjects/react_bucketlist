@@ -1,15 +1,11 @@
-import React, {Component} from "react";
+import React from "react";
 
 import Authorization from "./containers/Authorization";
 
-class App extends Component {
-	render() {
-		return (
-			<div className="App">
-				<Authorization/>
-			</div>
-		);
-	}
-}
+const App = () => (
+	<div className="App">
+		<Authorization/>
+	</div>
+);
 
 export default App;

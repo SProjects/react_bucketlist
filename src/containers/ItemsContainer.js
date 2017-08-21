@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import * as bucketlistActions from "../actions/bucketlistActions";
 import * as itemActions from "../actions/itemActions";
+import * as utils from "../utilities/tokenUtilities";
 
 import HeaderContainer from "../containers/HeaderContainer";
 import ItemsInListContainer from "../containers/ItemsInListContainer";
@@ -35,7 +37,7 @@ class ItemsContainer extends Component {
 
 	handleCreateSubmit() {
 		let name = this.props.itemName;
-		if (name < 1) {
+		if (!name) {
 			this.props.itemAction.missingFields("Item name is required.");
 		} else {
 			let bucketlist = this.props.item.get("bucketlist");
@@ -47,6 +49,10 @@ class ItemsContainer extends Component {
 	}
 
 	render() {
+		if(!utils.isAuthenticated()) {
+			this.context.router.history.push("/");
+		}
+
 		if (this.props.loading) {
 			return (
 				<Loading/>
@@ -84,6 +90,10 @@ class ItemsContainer extends Component {
 
 	}
 }
+
+ItemsContainer.contextTypes = {
+	router: PropTypes.object
+};
 
 function mapStateToProps(state) {
 	return {

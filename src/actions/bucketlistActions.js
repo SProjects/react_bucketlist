@@ -4,20 +4,20 @@ import * as headerUtils from "../utilities/headers";
 import * as urls from "../utilities/urls";
 
 
-export function bucketlistRequest() {
+function bucketlistRequest() {
 	return {
 		type: constants.BUCKETLISTS_REQUEST
 	};
 }
 
-export function listBucketlists(payload) {
+function listBucketlists(payload) {
 	return {
 		type: constants.BUCKETLISTS_FETCHED,
 		payload
 	};
 }
 
-export function bucketlistFetchFailed(error) {
+function bucketlistFetchFailed(error) {
 	return {
 		type: constants.BUCKETLISTS_FETCH_FAILED,
 		error
@@ -72,14 +72,14 @@ export function newBucketlistName(name) {
 	};
 }
 
-export function newBucketlistCreated(message) {
+function newBucketlistCreated(message) {
 	return {
 		type: constants.BUCKETLISTS_CREATED,
 		message
 	};
 }
 
-export function bucketlistCreateFailed(error) {
+function bucketlistCreateFailed(error) {
 	return {
 		type: constants.BUCKETLISTS_CREATE_FAILED,
 		error
@@ -162,21 +162,21 @@ export function closeEdit() {
 	};
 }
 
-export function bucketlistUpdated(message) {
+function bucketlistUpdated(message) {
 	return {
 		type: constants.BUCKETLISTS_UPDATED,
 		message
 	};
 }
 
-export function bucketlistUpdateFailed(error) {
+function bucketlistUpdateFailed(error) {
 	return {
 		type: constants.BUCKETLISTS_UPDATE_FAILED,
 		error
 	};
 }
 
-export function clearMessages() {
+function clearMessages() {
 	return {
 		type: constants.BUCKETLISTS_CLEARS_MESSAGES
 	};
@@ -213,14 +213,14 @@ export function closeDelete() {
 	};
 }
 
-export function bucketlistDeleted(message) {
+function bucketlistDeleted(message) {
 	return {
 		type: constants.BUCKETLISTS_DELETED,
 		message
 	};
 }
 
-export function bucketlistDeleteFailed(error) {
+function bucketlistDeleteFailed(error) {
 	return {
 		type: constants.BUCKETLISTS_DELETE_FAILED,
 		error

@@ -4,7 +4,7 @@ import * as headerUtils from "../utilities/headers";
 import * as urls from "../utilities/urls";
 
 
-export function showItems(bucketlist) {
+function showItems(bucketlist) {
 	return {
 		type: constants.ITEMS_REQUEST,
 		bucketlist: bucketlist,
@@ -35,7 +35,7 @@ export function editRequest(item) {
 	};
 }
 
-export function itemUpdated(message) {
+function itemUpdated(message) {
 	return {
 		type: constants.ITEMS_UPDATED,
 		message
@@ -48,7 +48,7 @@ export function closeEdit() {
 	};
 }
 
-export function updateFailed(error) {
+function updateFailed(error) {
 	return {
 		type: constants.ITEMS_EDIT_FAILED,
 		error
@@ -99,14 +99,14 @@ export function closeCreate() {
 	};
 }
 
-export function itemCreated(message) {
+function itemCreated(message) {
 	return {
 		type: constants.ITEMS_CREATED,
 		message
 	};
 }
 
-export function itemCreateFailed(error) {
+function itemCreateFailed(error) {
 	return {
 		type: constants.ITEMS_CREATE_FAILED,
 		error
@@ -144,14 +144,14 @@ export function closeDelete() {
 	};
 }
 
-export function itemDeleted(message) {
+function itemDeleted(message) {
 	return {
 		type: constants.ITEMS_DELETED,
 		message
 	};
 }
 
-export function itemDeleteFailed(error) {
+function itemDeleteFailed(error) {
 	return {
 		type: constants.ITEMS_DELETE_FAILED,
 		error
@@ -183,7 +183,7 @@ export function missingFields(error) {
 	};
 }
 
-export function clearMessages() {
+function clearMessages() {
 	return {
 		type: constants.ITEMS_CLEARS_MESSAGES
 	};

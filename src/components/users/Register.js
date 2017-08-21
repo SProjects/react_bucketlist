@@ -33,7 +33,7 @@ export class Register extends Component {
 
 	render() {
 		if (this.props.auth.get("isLoggedIn")) {
-			return (<Redirect to="/" from="/register"/>);
+			return (<Redirect to="/"/>);
 		}
 
 		return (

@@ -54,7 +54,7 @@ class BucketlistsContainer extends Component {
 
 	handleCreateSubmit() {
 		let name = this.props.bucketlist.get("bucketlistName");
-		if (name < 1) {
+		if (!name) {
 			this.props.bucketlistAction.missingFields("Bucketlist name is required");
 		} else {
 			let payload = {

@@ -11,5 +11,5 @@ export function removeAuthToken() {
 }
 
 export function isAuthenticated() {
-	return localStorage.getItem("token") === null;
+	return localStorage.getItem("token");
 }
